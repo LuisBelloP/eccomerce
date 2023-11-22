@@ -9,4 +9,4 @@ def home (request):
 
 def detail_view(request,id):
     products_to_post = products.objects.get(id=id)
-    return render(request,'view_detail.html',{'products_to_post':products_to_post})
+    return render(request,'view_details.html',{'products_to_post':products_to_post})
