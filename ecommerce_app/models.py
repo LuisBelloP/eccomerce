@@ -28,12 +28,6 @@ class products(models.Model):
     def get_all_products():
         return products.objects.all()
 
-    @staticmethod
-    def get_all_products_by_categoryid(category_id):
-        if category_id:
-            return products.objects.filter(category=category_id)
-        else:
-            return products.get_all_products()
 
 class customer(models.Model):
     first_name = models.CharField(max_length=50)
