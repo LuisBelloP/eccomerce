@@ -11,7 +11,6 @@ class Product_Admin(admin.ModelAdmin):
 ## class Order_Admin(admin.ModelAdmin):
 ## list_display = ('','','')
 ##  list_editable= ('products')
-
 ## Need function for diverse orders right
 ##admin.site.register(order,orderAdmin)
 

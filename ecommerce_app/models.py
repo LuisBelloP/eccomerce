@@ -28,7 +28,7 @@ class products(models.Model):
     def get_all_products():
         return products.objects.all()
 
-
+############################YOUR CURRENTLY CODE##############################
 class customer(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField (max_length=50)
@@ -54,6 +54,7 @@ class customer(models.Model):
             return True
 
         return False
+
 
 
 class order(models.Model):
