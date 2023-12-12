@@ -9,8 +9,8 @@ class Index(View):
     
     def post(self,request):
         product = request.POST.get('product')
-        cart = request.session.get('cart')
         remove = request.POST.get('remove')
+        cart = request.session.get('cart')
         
         if cart:
             quantity = cart.get(product)
@@ -27,9 +27,12 @@ class Index(View):
         else:
             cart = {}
             cart[product] = 1
+        request.session['cart'] = cart
         
-        
-        request.session['cart'] = cart        
+       
+        total_items = sum(cart.values())
+        request.session['total_items'] = total_items  
+               
         print(f'this is the product {product}')
         print('cart' , request.session['cart'])
         return redirect('home')
@@ -42,8 +45,6 @@ def store (request):
     cart = request.session.get('cart')
     if not cart:
         request.session['cart'] = {}
-    
-   
     
     products_to_post = products.get_all_products()
     print('you are : ', request.session.get('email'))
