@@ -9,15 +9,42 @@ class Index(View):
     
     def post(self,request):
         product = request.POST.get('product')
-                
+        cart = request.session.get('cart')
+        remove = request.POST.get('remove')
+        
+        if cart:
+            quantity = cart.get(product)
+            if quantity:
+                if remove:
+                    if quantity<=1:
+                        cart.pop(product)
+                    else:
+                        cart[product]  = quantity-1
+                else:
+                    cart[product]  = quantity+1
+            else:
+                cart[product] = 1
+        else:
+            cart = {}
+            cart[product] = 1
+        
+        
+        request.session['cart'] = cart        
         print(f'this is the product {product}')
-        #print('cart' , request.session['cart'])
+        print('cart' , request.session['cart'])
         return redirect('home')
     
     def get(self,request):
         return HttpResponseRedirect(f'/store{request.get_full_path()[1:]}')
 
 def store (request):
+    
+    cart = request.session.get('cart')
+    if not cart:
+        request.session['cart'] = {}
+    
+   
+    
     products_to_post = products.get_all_products()
     print('you are : ', request.session.get('email'))
     return render(request,'index.html',{'products_to_post':products_to_post})
@@ -121,7 +148,7 @@ class Login(View):
                 print(f'{flag}')    
         else:
           error_message = 'Invalid etapa 1 !!'
-        print (email,password)
+        #print (email,password)
         return render(request,'login.html',{'error':error_message})
     
     def logout(request):
