@@ -5,8 +5,8 @@ from django.views import View
 # Create your views here.
 
 
-class Home(View):
-    ### add and remove car system
+class Index(View):
+    
     def post(self,request):
         product = request.POST.get()
         remove = request.POST.get()
@@ -28,34 +28,26 @@ class Home(View):
             cart = {}
             cart[product] = 1
         request.session['cart'] = cart
+        
         print('cart' , request.session['cart'])
         return redirect('home')
     
     def get(self,request):
         return 
 
-
-## index home
-def home (request):
+def store (request):
     
-    ### Cart block 
-    #cart = request.session.get('cart')
-    #if not cart:
-    #    request.session['cart'] = {}
-    #products = None 
-    #data = {}
-    #data['products'] = products
     products_to_post = products.get_all_products()
-    
-    ############### HERE IS MY CODE ############################################################################
     print('you are : ', request.session.get('email'))
-    return render(request,'home.html',{'products_to_post':products_to_post})
+    return render(request,'index.html',{'products_to_post':products_to_post})
 
 ### detail view products
 def detail_view(request,id):
     products_to_post = products.objects.get(id=id)
     return render(request,'view_details.html',{'products_to_post':products_to_post})
 
+def aboutus(request):
+    return render(request,'about_us.html')
 
 class Signup(View):
     def  get(self,request):
@@ -118,6 +110,7 @@ class Signup(View):
 
 class Login(View):
     return_url = None
+    
     def get(self,request):
       Login.return_url = request.GET.get('return_url')
       return render (request,'login.html')  

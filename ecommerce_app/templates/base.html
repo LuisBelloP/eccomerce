@@ -41,7 +41,7 @@
           <li>
             <a
               class="text-sm text-black-400 hover:text-gray-500 font-bold"
-              href=""
+              href="/store"
               >Home</a
             >
           </li>
@@ -64,18 +64,16 @@
           <li>
             <a
               class="text-sm text-black-400 hover:text-gray-500 font-bold"
-              href="#"
+              href="/aboutus"
               >About Us</a
             >
           </li>
         </ul>
         
-        
-        
+
+            
         {%if request.session.customer%}
         <div>
-
-
           <a class="hidden lg:inline-block py-2 px-6 bg-purple-500 hover:bg-purple-600 text-sm text-white font-bold rounded-xl transition duration-200 ml-1"
           href="">
           <span class="badge badge-success">
@@ -89,17 +87,27 @@
             Logout
           </span>
           </a>
+
+          <a
+          class="hidden lg:inline-block py-2 px-6 bg-green-500 hover:bg-green-600 text-sm text-white font-bold rounded-xl transition duration-200 ml-3"
+          href=""
+          > Cart 
+          <span class="badge badge-success">{{request.session.cart.keys|length}}</span>
+          <span class="sr-only">(current)</span></a>
+          </a>
+
+
           
         </div>
           
         {%else%}
           <a
           class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold rounded-xl transition duration-200"
-          href="login/"
+          href="/login"
           >Sign In</a>
           <a
           class="hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200"
-          href="signup/"
+          href="/signup"
           >Sign up</a>
 
           <a
@@ -148,14 +156,14 @@
               <li class="mb-1">
                 <a
                   class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
-                  href="#"
+                  href="/store"
                   >Home</a
                 >
               </li>
               <li class="mb-1">
                 <a
                   class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
-                  href="#"
+                  href="/aboutus"
                   >About Us</a
                 >
               </li>
@@ -165,12 +173,12 @@
             <div class="pt-6">
               <a
                 class="block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold leading-none bg-gray-50 hover:bg-gray-100 rounded-xl"
-                href="login/"
+                href="/login"
                 >Sign in</a
               >
               <a
                 class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-blue-600 hover:bg-blue-700 rounded-xl"
-                href="signup/"
+                href="/signup"
                 >Sign Up</a
               >
               <a
@@ -181,177 +189,16 @@
                 <span class="sr-only">(current)</span></a>
               
               </a>
-            </div>
-            <p class="my-4 text-xs text-center text-gray-400">
-              <span>Copyright © 2021</span>
-            </p>
-          </div>
         </nav>
+   
+    
+    
       </div>
-      <!-- component -->
-      <section>
-        <div class="bg-white text-black">
-          <div
-            class="container mx-auto flex flex-col md:flex-row items-center md:my-14"
-          >
-            <div
-              class="flex flex-col w-full lg:w-1/3 justify-center items-start p-8"
-            >
-              <h1
-                class="text-6xl md:text-5xl p-2 text-yellow-400 tracking-loose text-bold"
-              >
-                MarketPlace
-              </h1>
-              <h2
-                class="text-3xl md:text-5xl leading-relaxed md:leading-snug mb-2"
-              >
-                Buy products from USA
-              </h2>
-              <p class="text-sm md:text-base mb-4">
-                Explore your favorite products and take advantage of their
-                price.
-              </p>
-              <a
-                href="#"
-                class="bg-transparent hover:bg-yellow-300 text-bold text-yellow-400 hover:text-black rounded shadow hover:shadow-lg py-2 px-4 border border-yellow-500 hover:border-transparent"
-              >
-                Explore Now
-              </a>
-            </div>
-            <div
-              class="p-6 mb-6 md:mb-0 md:mt-0 ml-0 md:ml-12 lg:w-2/3 justify-center"
-            >
-              <div class="h-30 flex flex-wrap content-center">
-                <div>
-                  <img
-                    class="h-auto"
-                    src="https://tecdn.b-cdn.net/img/new/ecommerce/vertical/004.jpg"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+
+      
         </div>
-      </section>
-      <section>
-        <div
-          class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5"
-        >
-        
-        
-          <!--Card 1-->
-          {%for x in products_to_post%}
-          <div class="max-w-2xl mx-auto">
-            <div
-              class="bg-white shadow-md rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700"
-            >
-              <a href="#">
-                 <!--Image-->
-                <img
-                  class="rounded-t-lg p-8"
-                  src={{x.image}} 
-                  alt="product image"
-                />
-              </a>
-              <div class="px-5 pb-5">
-                <a href="#">
-                  <!--Name-->
-                  <h3
-                    class="text-gray-900 font-semibold text-xl tracking-tight dark:text-white"
-                  >
-                  {{x.name}}
-                  </h3>
-                </a>
-                 
-                <div class="flex items-center mt-2.5 mb-5">
-                  <svg
-                    class="w-5 h-5 text-yellow-300"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                    ></path>
-                  </svg>
-                  <svg
-                    class="w-5 h-5 text-yellow-300"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                    ></path>
-                  </svg>
-                  <svg
-                    class="w-5 h-5 text-yellow-300"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                    ></path>
-                  </svg>
-                  <svg
-                    class="w-5 h-5 text-yellow-300"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                    ></path>
-                  </svg>
-                  <svg
-                    class="w-5 h-5 text-yellow-300"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                    ></path>
-                  </svg>
-                  <span
-                    class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3"
-                    >5.0</span
-                  >
-                </div>
-                <div class="flex items-center justify-between">
-                   <!--Price-->
-                  <span class="text-3xl font-bold text-gray-900 dark:text-white"
-                    >{{x.price}} mxn</span
-                  >
 
-                  
-                  {% comment %}
-                    function to add cardd ####################################################
-                  {% endcomment %}
-                    
-                  <a
-                    href="#"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    >Add</a
-                  >
-
-                  
-                  {% comment %} <button id="{{x.id}}" class='atc'> add card</button> {% endcomment %}
-
-
-                  <a href="/{{x.id}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    View</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          {%endfor%}
-          
-
-          
-          
-        </div>
+       {% block content %}{% endblock %}   
       </section>
       <footer class="w-full text-gray-700 bg-gray-100 body-font">
         <div
@@ -454,6 +301,8 @@
         </div>
     </footer>
     </body>
+
+    
 
     <script>
       // Burger menus
