@@ -89,9 +89,9 @@
         {% comment %}
           function to add cardd ####################################################
         {% endcomment %}
-        <form  method="POST" class="btn-block ">
+        <form action="/#{{x.id}}"  method="POST" class="btn-block ">
           {% csrf_token %}
-                        <input hidden type="text" name='product' value='{{x.name}}'>
+                        <input hidden type="text" name='product' value='{{x.id}}'>
                         <input type="submit" class="float-right btn btn-success form-control text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                           value="Add">
         </form>

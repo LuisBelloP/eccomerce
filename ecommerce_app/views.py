@@ -8,40 +8,20 @@ from django.views import View
 class Index(View):
     
     def post(self,request):
-        product = request.POST.get()
-        remove = request.POST.get()
-        cart = request.session.get()
-        
-        if cart:
-            quantity = cart.get(product)
-            if quantity:
-                if remove:
-                    if quantity <=1:
-                        cart.pop(product)
-                    else:
-                        cart[product] = quantity -1
-                else:  
-                    cart[product] = quantity +1  
-            else:
-                cart[product] = 1
-        else:
-            cart = {}
-            cart[product] = 1
-        request.session['cart'] = cart
-        
-        print('cart' , request.session['cart'])
+        product = request.POST.get('product')
+                
+        print(f'this is the product {product}')
+        #print('cart' , request.session['cart'])
         return redirect('home')
     
     def get(self,request):
-        return 
+        return HttpResponseRedirect(f'/store{request.get_full_path()[1:]}')
 
 def store (request):
-    
     products_to_post = products.get_all_products()
     print('you are : ', request.session.get('email'))
     return render(request,'index.html',{'products_to_post':products_to_post})
 
-### detail view products
 def detail_view(request,id):
     products_to_post = products.objects.get(id=id)
     return render(request,'view_details.html',{'products_to_post':products_to_post})
@@ -54,7 +34,6 @@ class Signup(View):
         return render(request,'sign_up.html')
    
     ##### function to coneect to formulario
-    ### error in hash the password was because the parameter password was bad reference.
     def post(self,request):
         postData= request.POST
         first_name = postData.get('firstname')
