@@ -42,7 +42,7 @@
             <a
               class="text-sm text-black-400 hover:text-gray-500 font-bold"
               href="/store"
-              >Home</a
+              >Tienda</a
             >
           </li>
           <li class="text-black-400 font-bold">
@@ -65,7 +65,7 @@
             <a
               class="text-sm text-black-400 hover:text-gray-500 font-bold"
               href="/aboutus"
-              >About Us</a
+              >Nosotros</a
             >
           </li>
         </ul>
@@ -88,9 +88,18 @@
           </span>
           </a>
 
+          <a class="hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200 ml-1"
+          href="/orders">
+          <span class="badge badge-success">
+            Orders
+          </span>
+          </a>
+
+
+
           <a
           class="hidden lg:inline-block py-2 px-6 bg-green-500 hover:bg-green-600 text-sm text-white font-bold rounded-xl transition duration-200 ml-3"
-          href=""
+          href="/cart"
           > Cart 
           <span class="badge badge-success">{{ request.session.total_items }}</span>
           <span class="sr-only">(current)</span></a>
@@ -150,14 +159,14 @@
                 <a
                   class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
                   href="/store"
-                  >Home</a
+                  >Tienda</a
                 >
               </li>
               <li class="mb-1">
                 <a
                   class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
                   href="/aboutus"
-                  >About Us</a
+                  >Nosotros</a
                 >
               </li>
             </ul>

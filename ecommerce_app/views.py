@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect,HttpResponseRedirect
-from .models import products,Customer
+from .models import products,Customer,order
 from django.contrib.auth.hashers import check_password,make_password
 from django.views import View
 # Create your views here.
@@ -158,6 +158,48 @@ class Login(View):
     
     
     
-    
+ 
+ 
+
+class Cart(View):
+    def get(self,request):
+        ids = list(request.session.get('cart').keys())
+        productbyid = products.get_products_by_id(ids)
+        print(productbyid.values())
+        return render(request,'cart.html',{'productbyid':productbyid})     
     
 
+
+
+class CheckOut(View):
+    
+    #manda la orden
+    def post(self,request):
+        address = request.POST.get('address')
+        phone = request.POST.get('phone')
+        customer = request.session.get('customer')
+        cart = request.session.get('cart')
+        productsitem = products.get_products_by_id(list(cart.keys()))
+        
+        print(address, phone, customer, cart, productsitem)
+        
+        for product in productsitem:
+            print(cart.get(str(product.id)))
+            orderitem = order(customer=Customer(id=customer),
+                          product=product,
+                          price=product.price,
+                          address=address,
+                          phone=phone,
+                          quantity=cart.get(str(product.id)))
+            orderitem.save()
+        request.session['cart'] = {}
+        return redirect('cart')
+    
+
+
+class OrderView(View):
+    def get(self, request):
+        customer = request.session.get('customer')
+        orders = order.get_orders_by_customer(customer)
+        print(f'this is the order{orders}')
+        return render(request , 'orders.html'  , {'orders' : orders})
