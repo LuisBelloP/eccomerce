@@ -20,7 +20,11 @@ class products(models.Model):
     price = models.IntegerField(default=0)
     category = models.ForeignKey(category,on_delete=models.CASCADE,default=1)
     description = models.CharField(max_length=250,default='',blank=True,null=True)
-    image = models.CharField(max_length=120)
+    image = models.CharField(max_length=350)
+    image_2 = models.CharField(max_length=350)
+    image_3 = models.CharField(max_length=350)
+    image_4 = models.CharField(max_length=350)
+    image_5 = models.CharField(max_length=350)
 
     
     @staticmethod
