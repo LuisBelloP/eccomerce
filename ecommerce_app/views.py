@@ -1,12 +1,13 @@
-from django.shortcuts import render,redirect,HttpResponseRedirect
+from django.shortcuts import render,redirect,HttpResponseRedirect,get_object_or_404,HttpResponse
 from .models import products,Customer,order
 from django.contrib.auth.hashers import check_password,make_password
 from django.views import View
+from django.urls import reverse 
+
 # Create your views here.
 
 
 class Index(View):
-    
     def post(self,request):
         product = request.POST.get('product')
         remove = request.POST.get('remove')
@@ -28,31 +29,28 @@ class Index(View):
             cart = {}
             cart[product] = 1
         request.session['cart'] = cart
-        
-       
         total_items = sum(cart.values())
         request.session['total_items'] = total_items  
-               
-        print(f'this is the product {product}')
-        print('cart' , request.session['cart'])
         return redirect('home')
     
     def get(self,request):
         return HttpResponseRedirect(f'/store{request.get_full_path()[1:]}')
 
 def store (request):
-    
     cart = request.session.get('cart')
     if not cart:
         request.session['cart'] = {}
-    
     products_to_post = products.get_all_products()
     print('you are : ', request.session.get('email'))
     return render(request,'index.html',{'products_to_post':products_to_post})
 
-def detail_view(request,id):
-    products_to_post = products.objects.get(id=id)
-    return render(request,'view_details.html',{'products_to_post':products_to_post})
+class Detail_view(View):
+    
+     def get(self,request,id):
+        products_to_post = products.objects.get(id=id)
+        return render(request,'view_details.html',{'products_to_post':products_to_post})
+
+
 
 def aboutus(request):
     return render(request,'about_us.html')
@@ -160,14 +158,18 @@ class Login(View):
     
  
  
-
 class Cart(View):
     def get(self,request):
         ids = list(request.session.get('cart').keys())
         productbyid = products.get_products_by_id(ids)
-        print(productbyid.values())
         return render(request,'cart.html',{'productbyid':productbyid})     
     
+    def post(self, request):
+        
+        
+        request.session['cart'] = {}
+        request.session.modified = True
+        return HttpResponseRedirect(reverse('cart'))
 
 
 

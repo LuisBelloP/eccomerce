@@ -12,7 +12,8 @@ urlpatterns = [
     path('store/',views.store,name='store'),
     
     path('aboutus/',views.aboutus, name='aboutus'),
-    path('<int:id>/',views.detail_view,name='detail_view'),
+    
+    path('<int:id>/',views.Detail_view.as_view(),name='Detail_view'),
     path('signup/',views.Signup.as_view(),name='signup'),
     path('login/',views.Login.as_view(),name='login'),
     path('logout/',views.Login.logout,name='logout'),

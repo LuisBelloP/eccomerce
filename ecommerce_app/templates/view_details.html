@@ -2,7 +2,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  
+
   
 <div class="bg-white">
     <div class="pt-6">
@@ -83,14 +83,13 @@
               {% comment %} <a href="#" class="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">117 reviews</a> {% endcomment %}
             </div>
           </div>
-  
-          <form class="mt-10">
-            
-  
-            <!-- Button Add to bag -->
-            
-  
-            <button type="submit" class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Add to bag</button>
+          {% comment %} The form focus on url to maintain the logic in one url  {% endcomment %}
+          <form action="/" method="POST" class="mt-10 btn-block">
+                    {% csrf_token %}
+                        <input hidden type="text" name='product' value='{{products_to_post.id}}'>
+                        <input type="submit" class="float-right btn btn-success form-control text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
+                        value="Agregar">
+          
           </form>
         </div>
   
@@ -106,16 +105,11 @@
          
   
           <div class="mt-10">
-            <h2 class="text-sm font-medium text-gray-900">Details</h2>
-  
-            <div class="mt-4 space-y-6">
-              <p class="text-sm text-gray-600">{{products_to_post.description}}</p>
-            </div>
+            
           </div>
         </div>
       </div>
     </div>
   </div>
   
-{% endblock  %}
-      
+{% endblock %}
