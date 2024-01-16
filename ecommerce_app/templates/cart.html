@@ -23,7 +23,7 @@
                     {% for product in productbyid %}
                     <tr>
                         <td class="py-2 px-4">{{ forloop.counter }}</td>
-                        <td><img class="h-20 w-20 " src="{{product.image}}" alt=""></td>
+                        <td><img class="h-20 w-20  " src="{{product.image}}" alt=""></td>
                         <td>{{product.name}}</td>
                         <td>{{product.price}} mxn</td>
                         <td>{{product|cart_quantity:request.session.cart}}</td>

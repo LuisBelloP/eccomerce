@@ -8,22 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-
-        <!-- Fonts -->
+     <!-- Documents Css -->
+     {% load static %}
+     <link rel="stylesheet" href="{% static 'base.css' %}">
+    <!-- Google Icon -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!--Google Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hepta+Slab:wght@1..900&family=Josefin+Slab:ital,wght@0,100..700;1,100..700&family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
-    <style>
-      .material-symbols-outlined {
-        font-variation-settings:
-        'FILL' 0,
-        'wght' 400,
-        'GRAD' 0,
-        'opsz' 24
-      }
-      </style>
-  
+    <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Josefin+Slab:ital,wght@0,100..700;1,100..700&family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+   
   </head>
   <body>
     <!-- navbar -->
@@ -31,11 +25,15 @@
       <nav
         class="relative px-4 py-2 flex justify-between items-center bg-white "
       >
-        <a class="text-1xl  font-bold leading-none" href="/store">
-          <span class="material-symbols-outlined">
+        <a class="text-3xl  font-bold leading-none" href="/store">
+          
+          <p class="text-blue-500 text-xxl roboto-slab ">
+            <span class="material-symbols-outlined">
             local_shipping
-            </span>
-          <p class="text-blue-500 text-xl">USA Delivery</p>
+          </span>
+            USA Delivery
+            
+          </p>
         </a>
         <div class="lg:hidden">
           <button class="navbar-burger flex items-center p-3">
@@ -54,12 +52,12 @@
         >
           <li>
             <a
-              class="text-sm text-black-400 hover:text-gray-500 font-bold"
+              class="arvo-regular text-md text-black-400 hover:text-gray-500 "
               href="/store"
               >Tienda</a
             >
           </li>
-          <li class="text-black-400 font-bold">
+          <li class="text-black-400 ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -77,7 +75,7 @@
           </li>
           <li>
             <a
-              class="text-sm text-black-400 hover:text-gray-500 font-bold"
+              class=" arvo-regular text-md text-black-400 hover:text-gray-500"
               href="/aboutus"
               >Nosotros</a
             >
@@ -88,21 +86,21 @@
             
         {%if request.session.customer%}
         <div>
-          <a class="hidden lg:inline-block py-2 px-6 bg-purple-500 hover:bg-purple-600 text-sm text-white font-bold rounded-xl transition duration-200 ml-1"
+          <a class=" josefin-slab hidden lg:inline-block py-2 px-6 bg-purple-500 hover:bg-purple-600 text-sm text-white font-bold rounded-xl transition duration-200 ml-1"
           href="">
           <span class="badge badge-success">
             Hola {{request.session.email}}
           </span>
           </a>
 
-          <a class="hidden lg:inline-block py-2 px-6 bg-red-500 hover:bg-red-600 text-sm text-white font-bold rounded-xl transition duration-200 ml-1"
+          <a class="josefin-slab hidden lg:inline-block py-2 px-6 bg-red-500 hover:bg-red-600 text-sm text-white font-bold rounded-xl transition duration-200 ml-1"
           href="/logout">
           <span class="badge badge-success">
             Cerrar sesion
           </span>
           </a>
 
-          <a class="hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200 ml-1"
+          <a class=" josefin-slab hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200 ml-1"
           href="/orders">
           <span class="badge badge-success">
             Orden
@@ -112,7 +110,7 @@
 
 
           <a
-          class="hidden lg:inline-block py-2 px-6 bg-green-500 hover:bg-green-600 text-sm text-white font-bold rounded-xl transition duration-200 ml-3"
+          class="josefin-slab hidden lg:inline-block py-2 px-6 bg-green-500 hover:bg-green-600 text-sm text-white font-bold rounded-xl transition duration-200 ml-3"
           href="/cart"
           > Carrito 
           <span class="badge badge-success">{{ request.session.total_items }}</span>
@@ -125,11 +123,11 @@
           
         {%else%}
           <a
-          class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-800 hover:bg-gray-800 text-sm text-white font-bold rounded-xl transition duration-200"
+          class="arvo-regular hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-800 hover:bg-gray-800 text-md text-white  rounded-md transition duration-200"
           href="/login"
           >Sign In</a>
           <a
-          class="hidden lg:inline-block py-2 px-6 bg-blue-600 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200"
+          class="arvo-regular hidden lg:inline-block py-2 px-6 bg-blue-600 hover:bg-blue-600 text-md text-white  rounded-md transition duration-200"
           href="/signup"
           >Sign up</a>
 
@@ -171,14 +169,14 @@
             <ul>
               <li class="mb-1">
                 <a
-                  class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
+                  class="block p-4 text-sm arvo-regular text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
                   href="/store"
                   >Tienda</a
                 >
               </li>
               <li class="mb-1">
                 <a
-                  class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
+                  class="block p-4 text-sm arvo-regular text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
                   href="/aboutus"
                   >Nosotros</a
                 >
@@ -188,17 +186,17 @@
           <div class="mt-auto">
             <div class="pt-6">
               <a
-                class="block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold leading-none bg-gray-50 hover:bg-gray-100 rounded-xl"
+                class="block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold arvo-regular leading-none bg-gray-50 hover:bg-gray-100 rounded-xl"
                 href="/login"
                 >Sign in</a
               >
               <a
-                class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-blue-500 hover:bg-blue-500 rounded-xl"
+                class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold arvo-regular bg-blue-500 hover:bg-blue-500 rounded-xl"
                 href="/signup"
                 >Sign Up</a
               >
               <a
-                class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-green-600 hover:bg-green-700 rounded-xl"
+                class="block px-4 py-3 mb-2 leading-loose text-xs text-center arvo-regulartext-white font-semibold bg-green-600 hover:bg-green-700 rounded-xl"
                 href=""
                 >Cart 
                 <span class="badge badge-success">{{request.session.cart.keys|length}}</span>
