@@ -6,9 +6,9 @@
 {% load custom_filter %}
 <div class="container">
    <div class="border rounded p-4 m-4">
-        <p class="display-4 pl-4 ml-4">Tu orden</p>
+        <p class=" arvo-regular display-4 pl-4 ml-4">Tu orden</p>
         <hr>
-        <table class="table">
+        <table class="table arvo-regular">
             <thead>
                 <tr>
                     <th></th>
@@ -24,7 +24,7 @@
             <tbody>
                 
                 {% for order in orders %}
-                <tr class="text-center align-middle">
+                <tr class="arvo-regular text-center align-middle">
                     <td>{{forloop.counter}}</td>
                     <td><img style="height: 80px;" class="rounded-circle" src="{{order.product.image}}" alt=""></td>
                     <td>{{order.product.name}}</td>

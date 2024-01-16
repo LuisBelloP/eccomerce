@@ -35,10 +35,10 @@
         </div>
         <div class="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
           <div class="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
-            <img src="{{products_to_post.subimage2}}" alt="Model wearing plain black basic tee." class="h-full w-full object-cover object-center">
+            {% comment %} <img src="{{products_to_post.subimage2}}" alt="Model wearing plain black basic tee." class="h-full w-full object-cover object-center"> {% endcomment %}
           </div>
           <div class="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
-            <img src="{{products_to_post.subimage3}}" alt="Model wearing plain gray basic tee." class="h-full w-full object-cover object-center">
+            <img src="{{products_to_post.image}}" alt="Model wearing plain gray basic tee." class="h-full w-full object-cover object-center">
           </div>
         </div>
         <div class="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
@@ -88,7 +88,7 @@
                     {% csrf_token %}
                         <input hidden type="text" name='product' value='{{products_to_post.id}}'>
                         <input type="submit" class="arvo-regular  bg-transparent hover:bg-blue-300 text-blue-400 hover:text-black rounded shadow hover:shadow-lg py-2 px-4 border border-blue-500 hover:border-transparent" 
-                        value="Agregar">
+                        value="Agregar al carrito">
           
           </form>
         </div>
