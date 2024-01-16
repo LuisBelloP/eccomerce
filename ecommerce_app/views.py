@@ -165,9 +165,10 @@ class Cart(View):
         return render(request,'cart.html',{'productbyid':productbyid})     
     
     def post(self, request):
-        
-        
-        request.session['cart'] = {}
+        cart={}
+        request.session['cart'] =cart
+        total_items = sum(cart.values())
+        request.session['total_items'] = total_items  
         request.session.modified = True
         return HttpResponseRedirect(reverse('cart'))
 
