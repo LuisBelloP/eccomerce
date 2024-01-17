@@ -141,12 +141,12 @@ class Login(View):
                     return redirect ('home')
                 
             else:
-                error_message = 'Invalid etapa 2!!'
+                error_message = 'Contraseña o Email incorrecto!!'
                 print(f'{password},{customer.password}')
                 
                 print(f'{flag}')    
         else:
-          error_message = 'Invalid etapa 1 !!'
+          error_message = 'Contraseña o Email incorrecto !!'
         #print (email,password)
         return render(request,'login.html',{'error':error_message})
     
