@@ -184,13 +184,12 @@
           </div>
           <div class="mt-auto">
             {% comment %} to configure {% endcomment %}
-            <div class="pt-6">
-              
+            <div class="pt-6">              
               {% if request.session.customer %}
                 <a
                   class="block px-4 py-3 mb-2 leading-loose text-xs text-center arvo-regulartext-white  bg-gray-600 hover:bg-gray-700 rounded-xl"
-                  href="/cart">Cart 
-                  <span class="badge badge-success">{{request.session.cart.keys|length}}</span>
+                  href="/orders">Orden 
+                  {% comment %} <span class="badge badge-success">{{request.session.cart.keys}}</span> {% endcomment %}
                   <span class="sr-only">(current)</span></a>
                 </a>
                 <a
@@ -207,7 +206,6 @@
                   </a>
                 </a>
               {% else %}
-
                 <a
                   class="block px-4 py-3 mb-3 leading-loose text-xs text-center  arvo-regular leading-none bg-gray-50 hover:bg-gray-100 rounded-xl"
                   href="/login"
@@ -218,8 +216,6 @@
                   >Sign Up</a>
                 {% endif %}
         </nav>
-   
-    
       </div>
         </div>
         
