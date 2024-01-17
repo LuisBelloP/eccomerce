@@ -106,9 +106,6 @@
             Orden
           </span>
           </a>
-
-
-
           <a
           class="josefin-slab hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200 ml-3"
           href="/cart"
@@ -133,6 +130,7 @@
 
         {% endif %}
 
+    {% comment %} navbar mobile device {% endcomment %}
       </nav>
       <div class="navbar-menu relative z-50 hidden">
         <div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
@@ -140,7 +138,7 @@
           class="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-4 px-6 bg-white border-r overflow-y-auto"
         >
           <div class="flex items-center mb-8">
-            <a class="mr-auto text-3xl font-bold leading-none" href="/sotre">
+            <a class="mr-auto text-3xl font-bold leading-none" href="/store">
               <p class="text-blue-500 text-xxl roboto-slab ">
             <span class="material-symbols-outlined">
             local_shipping
@@ -185,25 +183,40 @@
             </ul>
           </div>
           <div class="mt-auto">
+            {% comment %} to configure {% endcomment %}
             <div class="pt-6">
-              <a
-                class="block px-4 py-3 mb-3 leading-loose text-xs text-center  arvo-regular leading-none bg-gray-50 hover:bg-gray-100 rounded-xl"
-                href="/login"
-                >Sign in</a
-              >
-              <a
-                class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white  arvo-regular bg-gray-500 hover:bg-gray-500 rounded-xl"
-                href="/signup"
-                >Sign Up</a
-              >
-              <a
-                class="block px-4 py-3 mb-2 leading-loose text-xs text-center arvo-regulartext-white  bg-gray-600 hover:bg-gray-700 rounded-xl"
-                href="/"
-                >Cart 
-                <span class="badge badge-success">{{request.session.cart.keys|length}}</span>
-                <span class="sr-only">(current)</span></a>
               
-              </a>
+              {% if request.session.customer %}
+                <a
+                  class="block px-4 py-3 mb-2 leading-loose text-xs text-center arvo-regulartext-white  bg-gray-600 hover:bg-gray-700 rounded-xl"
+                  href="/cart">Cart 
+                  <span class="badge badge-success">{{request.session.cart.keys|length}}</span>
+                  <span class="sr-only">(current)</span></a>
+                </a>
+                <a
+                  class="block px-4 py-3 mb-2 leading-loose text-xs text-center arvo-regulartext-white  bg-gray-600 hover:bg-gray-700 rounded-xl"
+                  href="/">
+                  <span class="badge badge-success">
+                    Hola {{request.session.email}}
+                  </span>
+                  </a>
+                </a>
+                <a
+                  class="block px-4 py-3 mb-2 leading-loose text-xs text-center arvo-regulartext-white  bg-gray-600 hover:bg-gray-700 rounded-xl"
+                  href="/cart">Cart 
+                  </a>
+                </a>
+              {% else %}
+
+                <a
+                  class="block px-4 py-3 mb-3 leading-loose text-xs text-center  arvo-regular leading-none bg-gray-50 hover:bg-gray-100 rounded-xl"
+                  href="/login"
+                  >Sign in</a>
+                <a
+                  class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white  arvo-regular bg-gray-500 hover:bg-gray-500 rounded-xl"
+                  href="/signup"
+                  >Sign Up</a>
+                {% endif %}
         </nav>
    
     
