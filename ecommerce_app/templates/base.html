@@ -142,12 +142,12 @@
           <div class="flex items-center mb-8">
             <a class="mr-auto text-3xl font-bold leading-none" href="/sotre">
               <p class="text-blue-500 text-xxl roboto-slab ">
-                <span class="material-symbols-outlined">
-                local_shipping
-              </span>
-                USA Delivery
-                
-              </p>
+            <span class="material-symbols-outlined">
+            local_shipping
+          </span>
+            USA Delivery
+            
+          </p>
             </a>
             <button class="navbar-close">
               <svg
@@ -196,8 +196,14 @@
                 href="/signup"
                 >Sign Up</a
               >
+              <a
+                class="block px-4 py-3 mb-2 leading-loose text-xs text-center arvo-regulartext-white  bg-gray-600 hover:bg-gray-700 rounded-xl"
+                href="/"
+                >Cart 
+                <span class="badge badge-success">{{request.session.cart.keys|length}}</span>
+                <span class="sr-only">(current)</span></a>
               
-              
+              </a>
         </nav>
    
     
