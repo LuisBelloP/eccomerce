@@ -20,5 +20,6 @@ urlpatterns = [
     path('cart/',views.Cart.as_view(),name='cart'),
     
     path('check-out/',views.CheckOut.as_view(),name='checkout'),
+    path('get_addresses/', views.get_addresses, name='get_addresses'),
     path('orders/', auth_middleware(views.OrderView.as_view()), name='orders'),
 ]

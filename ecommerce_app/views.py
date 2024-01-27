@@ -4,6 +4,10 @@ from django.contrib.auth.hashers import check_password,make_password
 from django.views import View
 from django.urls import reverse 
 
+from googlemaps import Client as GoogleMaps
+from django.conf import settings
+from django.http import JsonResponse
+import requests 
 # Create your views here.
 
 
@@ -179,12 +183,13 @@ class CheckOut(View):
     #manda la orden
     def post(self,request):
         address = request.POST.get('address')
+        code_postal = request.POST.get('code_postal')
         phone = request.POST.get('phone')
         customer = request.session.get('customer')
         cart = request.session.get('cart')
         productsitem = products.get_products_by_id(list(cart.keys()))
         
-        print(address, phone, customer, cart, productsitem)
+        print(address,code_postal, phone, customer, cart, productsitem)
         
         for product in productsitem:
             print(cart.get(str(product.id)))
@@ -198,6 +203,33 @@ class CheckOut(View):
         request.session['cart'] = {}
         return redirect('cart')
     
+def get_addresses(request):
+    postal_code = request.GET.get('code_postal')
+    api_key = 'AIzaSyDYshbuU37TSIShLySGYxjP6bs4nMMPNx0' 
+    base_url = "https://maps.googleapis.com/maps/api/geocode/json"
+    response = requests.get(f"{base_url}?components=postal_code:{postal_code}&key={api_key}")
+    data = response.json()
+    address = []
+    # Itera a través de los resultados y extrae postcode_localities si están presentes
+    for result in data['results']:
+        # Algunos códigos postales pueden tener localidades asociadas directamente
+        if 'postcode_localities' in result:
+            address.extend(result['postcode_localities'])
+        else:
+            # Si no, intenta extraer la localidad de los componentes de la dirección
+            locality_component = next(
+                (component for component in result['address_components'] if 'locality' in component['types']), 
+                None
+            )
+            if locality_component:
+                address.append(locality_component['long_name'])
+    
+    
+
+    print(f'postal code {postal_code}')
+    print(f'address {address}')
+    
+    return JsonResponse(address, safe=False)
 
 
 class OrderView(View):

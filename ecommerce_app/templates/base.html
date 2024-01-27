@@ -342,5 +342,36 @@
         }
       });
     </script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var postalCodeField = document.getElementById('code_postal');
+        postalCodeField.addEventListener('change', function() {
+            var postalCode = this.value;
+            fetch(`/get_addresses/?code_postal=${postalCode}`)
+            .then(response => response.json())
+            .then(data => {
+                var addressSelect = document.getElementById('address');
+                addressSelect.innerHTML = ''; // Limpiar las opciones anteriores
+                // Asegúrate de que 'data' es un array y que los items son strings.
+                if(Array.isArray(data)) {
+                    data.forEach(function(locality) {
+                        // Como 'locality' es un string, lo usamos directamente para el texto y el valor.
+                        var option = new Option(locality, locality);
+                        addressSelect.appendChild(option);
+                    });
+                } else {
+                    console.error('La respuesta no es un array:', data);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    });
+    
+    
+    </script>
+
   </body>
 </html>

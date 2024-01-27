@@ -71,6 +71,8 @@ class order(models.Model):
     phone = models.CharField (max_length=50, default='', blank=True)
     date = models.DateField (default=datetime.datetime.today)
     status = models.BooleanField (default=False)
+    
+    code_postal = models.CharField (max_length=10, default='', blank=True)
 
     def placeOrder(self):
         self.save()
