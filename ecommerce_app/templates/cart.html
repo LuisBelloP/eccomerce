@@ -63,15 +63,21 @@
             <div class="mt-2 px-7 py-3 arvo-regular">
                 <form action="/check-out/" method="POST">
                     {% csrf_token %}
+
+                    
                     <div class="mb-4">
-                        <label for='code_postal' class="block text-gray-700 text-sm  mb-2">Codigo Postal</label>
-                        <input type="text" name='code_postal' id='code_postal' class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Tu Codigo Postal">
+                        <label for="code_postal" class="block text-gray-700 text-sm  mb-2">Codigo Postal</label>
+                        <input type="text" name="code_postal" id="code_postal" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Tu Codigo Postal">
                     </div>
                     <div class="mb-4">
-                        <label for="address" class="block text-gray-700 text-sm  mb-2">Direccion</label>
+                        <label for="address" class="block text-gray-700 text-sm  mb-2">Colonia</label>
                         <select name="address" id="address" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                             
                         </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="calle" class="block text-gray-700 text-sm  mb-2">Calle</label>
+                        <input type="text" name="calle" id="calle" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Nombre de la calle">
                     </div>
                     
                     <div class="mb-4">

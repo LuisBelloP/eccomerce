@@ -1,7 +1,10 @@
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
+GOOGLE_MAPS_API_KEY = os.getenv("API_KEY")
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -117,4 +120,3 @@ if not DEBUG:
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-GOOGLE_MAPS_API_KEY = 'AIzaSyDYshbuU37TSIShLySGYxjP6bs4nMMPNx0'

@@ -183,13 +183,14 @@ class CheckOut(View):
     #manda la orden
     def post(self,request):
         address = request.POST.get('address')
+        calle = request.POST.get('calle')
         code_postal = request.POST.get('code_postal')
         phone = request.POST.get('phone')
         customer = request.session.get('customer')
         cart = request.session.get('cart')
         productsitem = products.get_products_by_id(list(cart.keys()))
         
-        print(address,code_postal, phone, customer, cart, productsitem)
+        print(address,code_postal, phone, customer, cart, productsitem,calle)
         
         for product in productsitem:
             print(cart.get(str(product.id)))
@@ -197,6 +198,8 @@ class CheckOut(View):
                           product=product,
                           price=product.price,
                           address=address,
+                          calle=calle,
+                          code_postal=code_postal,
                           phone=phone,
                           quantity=cart.get(str(product.id)))
             orderitem.save()
