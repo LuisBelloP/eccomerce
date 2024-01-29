@@ -84,9 +84,17 @@
                         <label for="phone" class="block text-gray-700 text-sm  mb-2">Telefono</label>
                         <input type="text" name="phone" id="phone" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Tu numero telefonico">
                     </div>
+                    <section class="mb-4">
+                        <div class="mb-4">
+                            <h3>Precio Final</h3>
+                            <h5>{{productbyid|total_cart_price:request.session.cart}} mxn</h5>
+                        </div>
+                    </section>
                     <div class="flex items-center justify-between">
-                        <button type="button" onclick="document.getElementById('checkoutModal').classList.add('hidden')" class="px-4 py-2 rounded text-sm text-red-500 border border-red-500 hover:bg-red-500 hover:text-white">Cancelar</button>
-                        <input type="submit" class="px-4 py-2 rounded text-sm text-green-500 border border-green-500 hover:bg-green-500 hover:text-white cursor-pointer" value="Comprar">
+                          
+                            <button type="button" onclick="document.getElementById('checkoutModal').classList.add('hidden')" class="px-4 py-2 rounded text-sm text-red-500 border border-red-500 hover:bg-red-500 hover:text-white">Cancelar</button>
+                            <input type="submit" class="px-4 py-2 rounded text-sm text-green-500 border border-green-500 hover:bg-green-500 hover:text-white cursor-pointer" value="Pedir">
+                        
                     </div>
                 </form>
             </div>

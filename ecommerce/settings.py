@@ -4,7 +4,12 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-GOOGLE_MAPS_API_KEY = os.getenv("API_KEY")
+GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
+
+STRIPE_API_KEY = os.getenv('STRIPE_API_KEY', 'your-default-stripe-api-key')
+
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ecommerce_app',
+    'djangocms_admin_style',
 ]
 
 MIDDLEWARE = [

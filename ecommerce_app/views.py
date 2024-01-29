@@ -8,7 +8,10 @@ from googlemaps import Client as GoogleMaps
 from django.conf import settings
 from django.http import JsonResponse
 import requests 
+import stripe
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
+
 
 
 class Index(View):
@@ -179,7 +182,6 @@ class Cart(View):
 
 
 class CheckOut(View):
-    
     #manda la orden
     def post(self,request):
         address = request.POST.get('address')
@@ -188,10 +190,7 @@ class CheckOut(View):
         phone = request.POST.get('phone')
         customer = request.session.get('customer')
         cart = request.session.get('cart')
-        productsitem = products.get_products_by_id(list(cart.keys()))
-        
-        print(address,code_postal, phone, customer, cart, productsitem,calle)
-        
+        productsitem = products.get_products_by_id(list(cart.keys()))      
         for product in productsitem:
             print(cart.get(str(product.id)))
             orderitem = order(customer=Customer(id=customer),
@@ -203,12 +202,13 @@ class CheckOut(View):
                           phone=phone,
                           quantity=cart.get(str(product.id)))
             orderitem.save()
-        request.session['cart'] = {}
-        return redirect('cart')
+        #request.session['cart'] = {}
+        return redirect('create-checkout-session')
     
 def get_addresses(request):
     postal_code = request.GET.get('code_postal')
-    api_key = 'AIzaSyDYshbuU37TSIShLySGYxjP6bs4nMMPNx0' 
+    #### key api
+    api_key = settings.GOOGLE_MAPS_API_KEY
     base_url = "https://maps.googleapis.com/maps/api/geocode/json"
     response = requests.get(f"{base_url}?components=postal_code:{postal_code}&key={api_key}")
     data = response.json()
@@ -233,6 +233,33 @@ def get_addresses(request):
     print(f'address {address}')
     
     return JsonResponse(address, safe=False)
+
+@csrf_exempt
+def create_checkout_session(request):
+    stripe.api_key = settings.STRIPE_API_KEY
+    if request.method == 'POST':
+        
+        try:
+            checkout_session = stripe.checkout.Session.create(
+                line_items=[
+                    {
+                        'price':'{{PRICE_ID}}',
+                        'quantity':1,
+                    },
+                ],
+                mode='payment',
+                success_url=redirect('orders'),
+                cancel_url=redirect('cart'),
+                
+            )
+            return JsonResponse({'id':checkout_session.id})
+        except Exception as e:
+            return JsonResponse({'error':str(e)},status=400)
+    if request.method == 'GET':
+        ### recuperar elementos del carrito
+        cart = request.session.get('cart')
+        print(f'el carrito {cart}')
+        return render (request,'pay_method.html')
 
 
 class OrderView(View):

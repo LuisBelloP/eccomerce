@@ -18,6 +18,7 @@ urlpatterns = [
     path('login/',views.Login.as_view(),name='login'),
     path('logout/',views.Login.logout,name='logout'),
     path('cart/',views.Cart.as_view(),name='cart'),
+    path('create-checkout-session/', views.create_checkout_session, name='create-checkout-session'),
     
     path('check-out/',views.CheckOut.as_view(),name='checkout'),
     path('get_addresses/', views.get_addresses, name='get_addresses'),
