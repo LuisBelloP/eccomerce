@@ -31,7 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ecommerce_app',
-    'djangocms_admin_style',
+   
 ]
 
 MIDDLEWARE = [
