@@ -301,7 +301,7 @@
     </body>
 
     
-
+    <!--Script Menu--->
     <script>
       // Burger menus
       document.addEventListener("DOMContentLoaded", function () {
@@ -344,7 +344,7 @@
         }
       });
     </script>
-
+    <!--Script Add address with zip code--->
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         var postalCodeField = document.getElementById('code_postal');
@@ -373,6 +373,41 @@
     });
     
     
+    </script>
+    <!--Script Stripe--->
+    <script>
+      // Agrega un controlador de eventos a tu botón de pago o formulario
+      document.getElementById('checkout-button').addEventListener('click', function(e) {
+  // Opcional: Mostrar alguna animación de carga al usuario
+
+  // Hacer una solicitud al backend para crear una sesión de pago
+      fetch('/create-checkout-session/', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+      // Incluir CSRF token si es necesario
+        },
+    // Incluir cualquier dato adicional si es necesario
+      })
+      .then(function(response) {
+      return response.json();
+      })
+      .then(function(session) {
+      // Usar Stripe.js para redirigir a la página de pago
+      var stripe = Stripe('pk_live_51OMrQHLtLKOujhTJi0dyQOy855RPRT649gD0uNfx6UdC0jkriaIuwKnGXQtVxwDUNDXYL8nWTq7WuJKojjmdcSKg00obvmqW7b');
+      return stripe.redirectToCheckout({ sessionId: session.id });
+      })
+      .then(function(result) {
+        // Si `redirectToCheckout` falla, mostrar el error al usuario
+      if (result.error) {
+        alert(result.error.message);
+      }
+    })
+    .catch(function(error) {
+    // Manejar errores en la solicitud al backend
+      console.error('Error:', error);
+    });
+  });
     </script>
 
   </body>

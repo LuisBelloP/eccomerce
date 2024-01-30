@@ -227,8 +227,6 @@ def get_addresses(request):
             if locality_component:
                 address.append(locality_component['long_name'])
     
-    
-
     print(f'postal code {postal_code}')
     print(f'address {address}')
     
@@ -237,28 +235,32 @@ def get_addresses(request):
 @csrf_exempt
 def create_checkout_session(request):
     stripe.api_key = settings.STRIPE_API_KEY
+    cart = request.session.get('cart')
+    total_quantity = [int(value) for value in cart.values()]
     if request.method == 'POST':
-        
         try:
             checkout_session = stripe.checkout.Session.create(
                 line_items=[
                     {
-                        'price':'{{PRICE_ID}}',
-                        'quantity':1,
+                        ##recuperar cantidad de productos
+                        'price':'price_1OanB5LtLKOujhTJQhb5RzSM',
+                        'quantity':total_quantity[0],
                     },
                 ],
                 mode='payment',
-                success_url=redirect('orders'),
-                cancel_url=redirect('cart'),
-                
+                success_url=request.build_absolute_uri(reverse('orders')),
+                cancel_url=request.build_absolute_uri(reverse('cart')),
             )
             return JsonResponse({'id':checkout_session.id})
         except Exception as e:
             return JsonResponse({'error':str(e)},status=400)
     if request.method == 'GET':
         ### recuperar elementos del carrito
-        cart = request.session.get('cart')
+        
+        print(f'total quantity {total_quantity[0]}')
+        ##request.session['cart'] = {}
         print(f'el carrito {cart}')
+        
         return render (request,'pay_method.html')
 
 
