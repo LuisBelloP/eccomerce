@@ -257,7 +257,7 @@ def create_checkout_session(request):
     if request.method == 'GET':
         ### recuperar elementos del carrito
         
-        print(f'total quantity {total_quantity[0]}')
+        print(f'total quantity {total_quantity[0]+total_quantity[1]+total_quantity[2]}')
         ##request.session['cart'] = {}
         print(f'el carrito {cart}')
         
