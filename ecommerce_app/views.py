@@ -237,6 +237,7 @@ def create_checkout_session(request):
     stripe.api_key = settings.STRIPE_API_KEY
     cart = request.session.get('cart')
     total_quantity = [int(value) for value in cart.values()]
+    sum_total_quantity = sum(total_quantity)
     if request.method == 'POST':
         try:
             checkout_session = stripe.checkout.Session.create(
@@ -244,7 +245,7 @@ def create_checkout_session(request):
                     {
                         ##recuperar cantidad de productos
                         'price':'price_1OanB5LtLKOujhTJQhb5RzSM',
-                        'quantity':total_quantity[0],
+                        'quantity':sum_total_quantity,
                     },
                 ],
                 mode='payment',
@@ -257,7 +258,7 @@ def create_checkout_session(request):
     if request.method == 'GET':
         ### recuperar elementos del carrito
         
-        print(f'total quantity {total_quantity[0]+total_quantity[1]+total_quantity[2]}')
+        print(f'total quantity {sum_total_quantity}')
         ##request.session['cart'] = {}
         print(f'el carrito {cart}')
         

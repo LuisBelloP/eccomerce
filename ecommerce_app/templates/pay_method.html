@@ -4,19 +4,23 @@
 {% load cart %}
 {% load custom_filter %}
 
-<section class="max-w-lg  mx-lg p-10 bg-white shadow-md rounded-lg">
-  <div class="product flex items-center ">
-    <img class="w-32 h-32 object-cover rounded" src="https://i.imgur.com/EHyR2nP.png" alt="The cover of Stubborn Attachments" />
-    <div class="description">
-      <h3 class="text-lg font-semibold">Stubborn Attachments</h3>
-      <h5 class="text-md text-gray-600">$20.00</h5>
+<div class="flex items-center justify-center min-h-screen">
+  <div class="mt-30 max-w-lg mx-auto p-10 bg-white shadow-md rounded-lg">
+    <div class="product flex items-center ">
+      <img class="w-32 h-32 object-cover rounded" src="https://i.imgur.com/EHyR2nP.png" alt="The cover of Stubborn Attachments" />
+      <div class="description ml-4">
+        <h3 class="text-lg font-semibold">Bolsos</h3>
+        <h5 class="text-md text-gray-600">$20.00</h5>
+      </div>
     </div>
+    <form id="payment-form" class="mt-6">
+      <button type="button" id="checkout-button" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        Checkout
+      </button>
+    </form>
   </div>
-  <form id="payment-form" class="mt-6">
-    <button type="button" id="checkout-button" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-      Checkout
-    </button>
-  </form>
-</section>
+</div>
+
+
 
 {% endblock %}
