@@ -255,6 +255,7 @@ def create_checkout_session(request):
                 success_url=request.build_absolute_uri(reverse('orders')),
                 cancel_url=request.build_absolute_uri(reverse('cart')),
             )
+            request.session['cart'] = {}
             return JsonResponse({'id':checkout_session.id})
         except Exception as e:
             return JsonResponse({'error':str(e)},status=400)
@@ -264,7 +265,8 @@ def create_checkout_session(request):
         print(f'total quantity {sum_total_quantity}')
         ##request.session['cart'] = {}
         print(f'el carrito {cart}')
-        
+        ###this code is for new FEATURES
+        #
         return render (request,'pay_method.html')
 
 
