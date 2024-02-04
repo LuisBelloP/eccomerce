@@ -61,7 +61,10 @@ class Detail_view(View):
 
 def aboutus(request):
     return render(request,'about_us.html')
-
+def contactus(request):
+    return render(request,'contact_us.html')
+def term_privacy(request):
+    return render(request,'term_privacy.html')
 class Signup(View):
     def  get(self,request):
         return render(request,'sign_up.html')

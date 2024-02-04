@@ -11,8 +11,10 @@ urlpatterns = [
     path('',views.Index.as_view(),name='home'),
     path('store/',views.store,name='store'),
     
-    path('aboutus/',views.aboutus, name='aboutus'),
+    path('contactus/',views.contactus, name='contactus'),
+    path('term_privacy/',views.term_privacy, name='term_privacy'),
     
+    path('aboutus/',views.aboutus, name='aboutus'),
     path('<int:id>/',views.Detail_view.as_view(),name='Detail_view'),
     path('signup/',views.Signup.as_view(),name='signup'),
     path('login/',views.Login.as_view(),name='login'),

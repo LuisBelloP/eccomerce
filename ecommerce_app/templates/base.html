@@ -189,13 +189,13 @@
             <div class="pt-6">              
               {% if request.session.customer %}
                 <a
-                  class="block px-4 py-3 mb-2 leading-loose text-xs text-center arvo-regulartext-white  bg-gray-600 hover:bg-gray-700 rounded-xl"
+                  class="block px-4 py-3 mb-2 leading-loose text-xs text-center arvo-regular text-white  bg-gray-600 hover:bg-gray-700 rounded-xl"
                   href="/orders">Orden 
                   {% comment %} <span class="badge badge-success">{{request.session.cart.keys}}</span> {% endcomment %}
                   <span class="sr-only">(current)</span></a>
                 </a>
                 <a
-                  class="block px-4 py-3 mb-2 leading-loose text-xs text-center arvo-regulartext-white  bg-gray-600 hover:bg-gray-700 rounded-xl"
+                  class="block px-4 py-3 mb-2 leading-loose text-xs text-center arvo-regular text-white  bg-gray-600 hover:bg-gray-700 rounded-xl"
                   href="/">
                   <span class="badge badge-success">
                     Hola {{request.session.email}}
@@ -203,7 +203,7 @@
                   </a>
                 </a>
                 <a
-                  class="block px-4 py-3 mb-2 leading-loose text-xs text-center arvo-regulartext-white  bg-gray-600 hover:bg-gray-700 rounded-xl"
+                  class="block px-4 py-3 mb-2 leading-loose text-xs text-center arvo-regular text-white  bg-gray-600 hover:bg-gray-700 rounded-xl"
                   href="/cart">Carrito
                   </a>
                 </a>
@@ -234,27 +234,20 @@
                 
                 <div class="mt-4">
                     <span class="inline-flex justify-center mt-1 sm:ml-auto sm:mt-0 sm:justify-start">
-                        <a class="text-gray-500 cursor-pointer hover:text-gray-700">
+                        <a class="text-gray-500 cursor-pointer hover:text-gray-700" href="https://www.facebook.com/usa.delivery.2024">
                             <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 class="w-5 h-5" viewBox="0 0 24 24">
                                 <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
                             </svg>
                         </a>
-                        <a class="ml-3 text-gray-500 cursor-pointer hover:text-gray-700">
-                            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                class="w-5 h-5" viewBox="0 0 24 24">
-                                <path
-                                    d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
-                                </path>
-                            </svg>
-                        </a>
-                        <a class="ml-3 text-gray-500 cursor-pointer hover:text-gray-700">
+                  
+                        {% comment %} <a class="ml-3 text-gray-500 cursor-pointer hover:text-gray-700">
                             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                 stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
                                 <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
                                 <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
                             </svg>
-                        </a>
+                        </a> {% endcomment %}
                         <a class="ml-3 text-gray-500 cursor-pointer hover:text-gray-700">
                             
                         </a>
@@ -266,7 +259,7 @@
                     <h2 class="mb-3 text-sm font-medium tracking-widest text-gray-900 uppercase title-font">Nosotros</h2>
                     <nav class="mb-5 list-none">
                         <li class="mt-3">
-                            <a class="text-gray-500 cursor-pointer hover:text-gray-900">Empresa</a>
+                            <a class="text-gray-500 cursor-pointer hover:text-gray-900" href="https://www.facebook.com/usa.delivery.2024">Empresa</a>
                         </li>
                     </nav>
                 </div>
@@ -274,7 +267,7 @@
                     <h2 class="mb-3 text-sm font-medium tracking-widest text-gray-900 uppercase title-font">Soporte</h2>
                     <nav class="mb-10 list-none">
                         <li class="mt-3">
-                            <a class="text-gray-500 cursor-pointer hover:text-gray-900">Contact us</a>
+                            <a class="text-gray-500 cursor-pointer hover:text-gray-900" href="/contactus">Contactanos</a>
                         </li>
                         
                     </nav>
@@ -284,7 +277,7 @@
                     </h2>
                     <nav class="mb-10 list-none">
                         <li class="mt-3">
-                            <a class="text-gray-500 cursor-pointer hover:text-gray-900">Terms &amp; Privacy</a>
+                            <a class="text-gray-500 cursor-pointer hover:text-gray-900" href="/term_privacy">Terminos &amp; Condiciones</a>
                         </li>
                        
                     </nav>
