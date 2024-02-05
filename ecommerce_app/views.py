@@ -189,6 +189,7 @@ class CheckOut(View):
     def post(self,request):
         address = request.POST.get('address')
         calle = request.POST.get('calle')
+        num_interior = request.POST.get('num_int')
         code_postal = request.POST.get('code_postal')
         phone = request.POST.get('phone')
         customer = request.session.get('customer')
@@ -201,6 +202,7 @@ class CheckOut(View):
                           price=product.price,
                           address=address,
                           calle=calle,
+                          num_interior=num_interior,
                           code_postal=code_postal,
                           phone=phone,
                           quantity=cart.get(str(product.id)))
