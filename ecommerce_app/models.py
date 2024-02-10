@@ -2,7 +2,7 @@ from django.db import models
 import datetime
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.hashers import make_password
-
+from django.utils.html import format_html
 # Create your models here.
 
 class category(models.Model):
@@ -25,7 +25,7 @@ class products(models.Model):
     image_3 = models.CharField(max_length=350)
     image_4 = models.CharField(max_length=350)
     image_5 = models.CharField(max_length=350)
-
+    quantity = models.IntegerField(default=0)
     
     @staticmethod
     def get_products_by_id(ids):
@@ -34,7 +34,18 @@ class products(models.Model):
     @staticmethod
     def get_all_products():
         return products.objects.all()
-
+    
+    def less(self):
+        if self.quantity > 0:  # It's good to check to avoid negative quantities
+            self.quantity -= 1
+            self.save()
+    
+    def image_render(self):
+        if self.image:
+            return format_html('<img src="{}" width="100" height="auto" />', self.image)
+        return "" 
+    image_render.short_description='Image'    
+    image_render.allow_tags = True    
 ############################YOUR CURRENTLY CODE##############################
 class Customer(models.Model):
     first_name = models.CharField(max_length=50)
@@ -76,6 +87,7 @@ class order(models.Model):
     status = models.BooleanField (default=False)
     
     
+    
 
     def placeOrder(self):
         self.save()
@@ -83,3 +95,11 @@ class order(models.Model):
     @staticmethod
     def get_orders_by_customer(customer_id):
         return order.objects.filter(customer=customer_id).order_by('-date')
+    
+    @property
+    def product_image(self):
+        if self.product.image:
+            return format_html('<img src="{}" width="100" height="auto" />', self.product.image)
+        return ""
+    
+    

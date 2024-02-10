@@ -196,7 +196,8 @@ class CheckOut(View):
         cart = request.session.get('cart')
         productsitem = products.get_products_by_id(list(cart.keys()))      
         for product in productsitem:
-            print(cart.get(str(product.id)))
+            #first step to rest product on admin panel 
+            cart_quantity_product_model=cart.get(str(product.id))
             orderitem = order(customer=Customer(id=customer),
                           product=product,
                           price=product.price,
@@ -205,9 +206,13 @@ class CheckOut(View):
                           num_interior=num_interior,
                           code_postal=code_postal,
                           phone=phone,
-                          quantity=cart.get(str(product.id)))
+                          quantity=cart.get(str(product.id))
+                          )
+            # second step to rest prodcut on admin panel 
+            for _ in range(cart_quantity_product_model): 
+                product.less()
+                
             orderitem.save()
-        #request.session['cart'] = {}
         return redirect('create-checkout-session')
     
 def get_addresses(request):

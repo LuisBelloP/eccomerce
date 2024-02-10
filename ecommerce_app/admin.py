@@ -3,19 +3,21 @@ from .models import category,products,Customer,order
 # Register your models here.
 
 class Product_Admin(admin.ModelAdmin):
-    list_display =('name','price','description','image')
+    list_display =('name','price','description','image','image_render','quantity')
     ##search_fields = ('')
-    list_editable = ('price','image','description')
+    list_editable = ('price','image','description','quantity')
     
 
-## class Order_Admin(admin.ModelAdmin):
-## list_display = ('','','')
-##  list_editable= ('products')
-## Need function for diverse orders right
-##admin.site.register(order,orderAdmin)
-
+class Order_Admin(admin.ModelAdmin):
+    list_display = ('product','product_image','quantity','code_postal','address','phone','date','status')
+    readonly_fields=('product_image',)
+    
+    def product_image(self,obj):
+        return obj.product_image
+    product_image.short_description ='Product Image'
+    product_image.allow_tags = True
 
 admin.site.register(products,Product_Admin)
 admin.site.register(category)
 admin.site.register(Customer)
-admin.site.register(order)
+admin.site.register(order,Order_Admin)
