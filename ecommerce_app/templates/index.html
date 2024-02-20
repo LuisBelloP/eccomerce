@@ -74,19 +74,28 @@
 
 <!--Index Products-->
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 m-2">
-
+  {%with products_count=products_to_post|length%}
   
-    {%for x in products_to_post%}
-<div class="max-w-2xl mx-auto">
-  <div class="bg-white shadow-sm rounded-lg max-w-sm dark:bg-white dark:bg-white">
-    <a href="/{{x.id}}">
+  {% if products_count > 5  %}
+    
+    {% for x in products_to_post  %}
+      {%if forloop.counter <= 11 %}
+<div class="max-w-sm mx-auto ">
+  <div class="bg-white shadow-sm rounded-lg">
+    <div class="h-60 w-full flex justify-center items-center  overflow-hidden rounded-lg">
+      <a href="/{{x.id}}">
        <!--Image-->
-      <img
-        class="rounded-md"
+  
+        <img
+        class="h-full w-auto object-cover p-10 rounded-lg "
         src={{x.image}} 
         alt="product image"
       />
+       
+      
     </a>
+    </div>
+    
     <div class="px-5 pb-5">
       <a href="/{{x.id}}">
         <!--Name-->
@@ -202,15 +211,183 @@
     </div>
   </div>
 </div>
-{%endfor%}
+    {% endif %}
+  {%endfor%}
+{% else %}
+
+  
+  {% for x in products_to_post  %}
+  div>
+  <h2>{{ x.name }}</h2>
+  <p>{{ x.description }}</p>
+  {# etc... #}
+  </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+    
 
 </div>
 <section id='ofertas'>
-  <div  class="bg-black p-2 text-white text-center">
-  <h1 class=" text-2xl roboto-slab text-bold  tracking-tight ">
+  <div  class="bg-black p-5 text-white text-center">
+  <h1 class=" text-3xl roboto-slab text-bold  tracking-tight ">
     Unicas Piezas
   </h1>
 </div>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 m-2">
+  {% with products_count=products_to_post|length %}
+  {% if products_count > 2 %}
+    {% for x in products_to_post %}
+      {% if forloop.revcounter <= 9 %}
+        {# Renderiza la información del producto aquí #}
+        <div class="max-w-2xl mx-auto">
+          <div class="bg-white shadow-sm rounded-lg">
+            <div class="h-60 w-full flex justify-center items-center  overflow-hidden rounded-lg">
+
+              <a href="/{{x.id}}">
+               <!--Image-->
+              <img
+                class="h-full w-auto object-cover p-10 rounded-lg "
+                src={{x.image}} 
+                alt="product image"
+              />
+            </a>
+            </div>
+            
+            <div class="px-5 pb-5">
+              <a href="/{{x.id}}">
+                <!--Name-->
+                <h3 class="roboto-slab text-gray-900  text-xl tracking-tight dark:text-gray-900">
+                {{x.name}}
+                </h3>
+              </a>
+               
+              <div class="flex items-center mt-2.5 mb-5">
+                <svg
+                  class="w-5 h-5 text-yellow-300"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                  ></path>
+                </svg>
+                <svg
+                  class="w-5 h-5 text-yellow-300"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                  ></path>
+                </svg>
+                <svg
+                  class="w-5 h-5 text-yellow-300"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                  ></path>
+                </svg>
+                <svg
+                  class="w-5 h-5 text-yellow-300"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                  ></path>
+                </svg>
+                <svg
+                  class="w-5 h-5 text-yellow-300"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                  ></path>
+                </svg>
+                <span
+                  class="arvo-regular bg-gray-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-200 dark:text-blue-800 ml-3"
+                  >5.0</span
+                >
+                {% if x.quantity > 0%}
+                <span
+                  class="arvo-regular bg-gray-100 text-blue-800 text-s font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-200 dark:text-blue-800 ml-3"
+                  >{{x.quantity}}  Disponibles</span
+                >
+                {% else %}
+                <span
+                  class="arvo-regular bg-red-100 text-red-800 text-s font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-800 ml-3"
+                  >No disponible</span
+                >
+                {% endif %}
+              </div>
+              <div class="flex items-center justify-between">
+                 <!--Price-->
+                <span class="text-3xl arvo-regular text-gray-900 dark:text-gray-900"
+                  >${{x.price}}mx</span
+                >
+                {% comment %}
+                  function to add cardd ####################################################
+                {% endcomment %}
+        
+                {% if x|is_in_cart:request.session.cart %}
+                    <div class="flex items-center justify-center space-x-2">
+                        <form action="/#{{x.id}}" class="col-2" method="post">
+                            {% csrf_token %}
+                            <input hidden type="text" name="product"  value='{{x.id}}' >
+                            <input hidden type="text" name="remove" value="True" >
+                            <input type="submit" value="-" class="arvo-regular float-right float-right btn btn-success form-control text-white bg-black hover:bg-black-800 focus:ring-4 focus:ring-black-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-black-600 dark:hover:bg-black-700 dark:focus:ring-black-800 border-right">
+                        </form>
+                        
+                            <div class="text-center text-black arvo-regular">{{x|cart_quantity:request.session.cart}}</div>
+                        
+                        <form action="/#{{x.id}}" class="col-2 " method="post">
+                            {% csrf_token %}
+                            <input hidden type="text" name='product' value='{{x.id}}'>
+                            <input type="submit" value=" + " class="arvo-regular float-right float-right btn btn-success form-control text-white bg-black hover:bg-black-800 focus:ring-4 focus:ring-black-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-black-600 dark:hover:bg-black-700 dark:focus:ring-black-800 border-left">
+                        </form>
+                    </div>
+                {% else %}
+                <form action="/#{{x.id}}"  method="POST" class="btn-block ">
+                               {% csrf_token %}
+                                <input hidden type="text" name='product' value='{{x.id}}'>
+                                <input type="submit" class=" arvo-regular float-right btn btn-success form-control text-white bg-black hover:bg-black-800 focus:ring-4 focus:ring-black-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-black-600 dark:hover:bg-black-700 dark:focus:ring-black-800"
+                                  value="Agregar">
+                </form>
+                {% endif %}
+                {% comment %} <a href="/{{x.id}}" class="arvo-regular float-right btn btn-success form-control text-white bg-black hover:bg-black-800 focus:ring-4 focus:ring-black-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-black-600 dark:hover:bg-black-700 dark:focus:ring-black-800">
+                  Ver</a> {% endcomment %}
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  {% else %}
+    {# Si hay 2 o menos productos, simplemente renderízalos todos #}
+    {% for x in products_to_post %}
+      <div>
+        <h2>{{ x.name }}</h2>
+        <p>{{ x.description }}</p>
+        {# etc... #}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+</div>
+
+
+
+        
+
 </section>
 
 {% endblock %}
