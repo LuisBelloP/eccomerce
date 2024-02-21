@@ -237,7 +237,6 @@ def get_addresses(request):
             )
             if locality_component:
                 address.append(locality_component['long_name'])
-    
     print(f'postal code {postal_code}')
     print(f'address {address}')
     
@@ -267,14 +266,12 @@ def create_checkout_session(request):
             return JsonResponse({'id':checkout_session.id})
         except Exception as e:
             return JsonResponse({'error':str(e)},status=400)
+        
     if request.method == 'GET':
         ### recuperar elementos del carrito
-        
         print(f'total quantity {sum_total_quantity}')
-        ##request.session['cart'] = {}
         print(f'el carrito {cart}')
         ###this code is for new FEATURES
-        #
         return render (request,'pay_method.html')
 
 

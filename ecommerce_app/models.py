@@ -26,7 +26,7 @@ class products(models.Model):
     image_4 = models.CharField(max_length=350)
     image_5 = models.CharField(max_length=350)
     quantity = models.IntegerField(default=0)
-    
+    stripe_price_id = models.CharField(max_length=500)
     @staticmethod
     def get_products_by_id(ids):
         return products.objects.filter(id__in=ids)
