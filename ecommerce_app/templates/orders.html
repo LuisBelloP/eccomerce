@@ -4,49 +4,52 @@
 {% block content %}
 {% load cart %}
 {% load custom_filter %}
-<div class="container">
-   <div class="border rounded p-4 m-4">
-        <p class=" arvo-regular display-4 pl-4 ml-4">Tu orden</p>
-        <hr>
-        <table class="table arvo-regular">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th>Producto</th>
-                    <th>Fecha</th>
-                    <th>Precio </th>
-                    <th>Cantidad</th>
-                    <th>Total</th>
-                    <th>Estatus de compra</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                {% for order in orders %}
-                <tr class="arvo-regular text-center align-middle">
-                    <td>{{forloop.counter}}</td>
-                    <td><img style="height: 80px;" class="rounded-circle" src="{{order.product.image}}" alt=""></td>
-                    <td>{{order.product.name}}</td>
-                    <td>{{order.date}}</td>
-                    <td>{{order.price}}</td>
-                    <td>{{order.quantity}}</td>
-                    <td>{{order.quantity|multiply:order.price}}</td>
-                    {% if order.status %}
-                    <td><small class="lg:inline-block py-1 px-4 bg-green-500 hover:bg-green-600 text-sm text-white font-bold  ml-1">Enviada</small></td>
-                    {%else%}
-                    <td><small class="lg:inline-block py-1 px-4 bg-red-500 hover:bg-red-600 text-sm text-white font-bold   ml-1">Pendiente</small></td>
-                    {% endif %}
-                </tr>
-
-                {% endfor %}
-               
-            </tbody>
-
-        </table>
-       
-   </div>
-</div>
+<div class="container mx-auto px-4">
+    <div class="border rounded p-4 m-4">
+         <p class="arvo-regular text-lg pl-4 ml-4">Tu orden</p>
+         <hr>
+         <!-- Contenedor con desplazamiento horizontal para pantallas pequeñas -->
+         <div class="overflow-x-auto">
+             <table class="min-w-full table-auto text-left arvo-regular">
+                 <thead>
+                     <tr>
+                         <th class="px-4 py-2">No.</th> <!-- Añadido para el número de orden -->
+                         <th class="px-4 py-2">Imagen</th> <!-- Añadido para la columna de imagen -->
+                         <th class="px-4 py-2">Producto</th>
+                         <th class="px-4 py-2">Fecha</th>
+                         <th class="px-4 py-2">Precio</th>
+                         <th class="px-4 py-2">Cantidad</th>
+                         <th class="px-4 py-2">Total</th>
+                         <th class="px-4 py-2">Estatus de compra</th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                     {% for order in orders %}
+                     <tr class="text-center align-middle">
+                         <td class="px-4 py-2">{{ forloop.counter }}</td>
+                         <td class="px-4 py-2">
+                             <!-- Clases para controlar la visibilidad y el tamaño de la imagen -->
+                             <img class="inline-block h-12 w-12 sm:h-16 sm:w-16 md:h-24 md:w-24 object-cover rounded-full" src="{{ order.product.image }}" alt="{{ order.product.name }}">
+                         </td>
+                         <td class="px-4 py-2">{{ order.product.name }}</td>
+                         <td class="px-4 py-2">{{ order.date }}</td>
+                         <td class="px-4 py-2">{{ order.price }}</td>
+                         <td class="px-4 py-2">{{ order.quantity }}</td>
+                         <td class="px-4 py-2">{{ order.quantity|multiply:order.price }}</td>
+                         {% if order.status %}
+                         <td class="px-4 py-2"><small class="inline-block py-1 px-4 bg-green-500 hover:bg-green-600 text-xs sm:text-sm text-white font-bold ml-1">Enviada</small></td>
+                         {% else %}
+                         <td class="px-4 py-2"><small class="inline-block py-1 px-4 bg-red-500 hover:bg-red-600 text-xs sm:text-sm text-white font-bold ml-1">Pendiente</small></td>
+                         {% endif %}
+                     </tr>
+                     {% endfor %}
+                 </tbody>
+             </table>
+         </div>
+    </div>
+ </div>
+ 
+ 
 
 
 

@@ -245,19 +245,23 @@ def get_addresses(request):
 @csrf_exempt
 def create_checkout_session(request):
     stripe.api_key = settings.STRIPE_API_KEY
-    cart = request.session.get('cart')
-    total_quantity = [int(value) for value in cart.values()]
-    sum_total_quantity = sum(total_quantity)
+    cart = request.session.get('cart',{})
+    #total_quantity = [int(value) for value in cart.values()]
+    #sum_total_quantity = sum(total_quantity)
+    line_items = []
+    for product_id,quantity in cart.items():
+        product= get_object_or_404(products,id=product_id)
+        
+        line_items.append(
+            {
+                'price':product.stripe_price_id,
+                'quantity':quantity, 
+            }
+        )
     if request.method == 'POST':
         try:
             checkout_session = stripe.checkout.Session.create(
-                line_items=[
-                    {
-                        ##recuperar cantidad de productos
-                        'price':'price_1OanB5LtLKOujhTJQhb5RzSM',
-                        'quantity':sum_total_quantity,
-                    },
-                ],
+                line_items=line_items,
                 mode='payment',
                 success_url=request.build_absolute_uri(reverse('orders')),
                 cancel_url=request.build_absolute_uri(reverse('cart')),
@@ -265,11 +269,12 @@ def create_checkout_session(request):
             request.session['cart'] = {}
             return JsonResponse({'id':checkout_session.id})
         except Exception as e:
-            return JsonResponse({'error':str(e)},status=400)
+            print(e)  # Esto imprimirá la excepción completa en la terminal
+        return JsonResponse({'error': str(e)}, status=400)
         
     if request.method == 'GET':
         ### recuperar elementos del carrito
-        print(f'total quantity {sum_total_quantity}')
+        print(f'total quantity {quantity}')
         print(f'el carrito {cart}')
         ###this code is for new FEATURES
         return render (request,'pay_method.html')
