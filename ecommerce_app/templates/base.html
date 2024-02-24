@@ -17,7 +17,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Josefin+Slab:ital,wght@0,100..700;1,100..700&family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
-   
+   <!-- Agrega Swiper's CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
     <!--Script Stripe-->
     <script src="https://js.stripe.com/v3/"></script>
 
@@ -199,7 +200,7 @@
                 </a>
                 <a
                   class="block px-4 py-3 mb-2 leading-loose text-xs text-center arvo-regular text-white  bg-gray-600 hover:bg-gray-700 rounded-xl"
-                  href="/">
+                  href="/cart">
                   <span class="badge badge-success">
                     Hola {{request.session.email}}
                   </span>
@@ -208,6 +209,14 @@
                 <a
                   class="block px-4 py-3 mb-2 leading-loose text-xs text-center arvo-regular text-white  bg-gray-600 hover:bg-gray-700 rounded-xl"
                   href="/cart">Carrito
+                  </a>
+                </a>
+                <a
+                  class="block px-4 py-3 mb-2 leading-loose text-xs text-center arvo-regular text-white  bg-gray-600 hover:bg-gray-700 rounded-xl"
+                  href="/logout">
+                  <span class="badge badge-success">
+                    Cerrar sesion
+                  </span>
                   </a>
                 </a>
               {% else %}
@@ -395,6 +404,39 @@
       console.error('Error:', error);
     });
   });
+    </script>
+
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <script>
+      var swiper = new Swiper('.mySwiper', {
+        // Parámetros de Swiper
+        slidesPerView: 1,
+        spaceBetween: 10,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+        // Navegación con flechas
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        // Responsive breakpoints
+        breakpoints: {
+          // cuando la pantalla sea >= 640px
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          // cuando la pantalla sea >= 768px
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+          },
+        },
+      });
     </script>
 
 

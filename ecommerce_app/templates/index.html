@@ -33,7 +33,7 @@
       <!-- Item 3 -->
       <div class="hidden duration-700 ease-in-out flex justify-center " data-carousel-item>
           <img src="https://images.pexels.com/photos/7135066/pexels-photo-7135066.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-          <h1 class="z-10 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl roboto-slab font-bold tracking-tight text-black m-20">
+          <h1 class="z-10 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl roboto-slab font-bold tracking-tight text-black lg:mt-40 m-20 md:mt-40">
             <a href="#ofertas" class="scroll-smooth">
               Aceptamos pagos electrónicos en todos nuestros productos
             </a>
@@ -41,10 +41,10 @@
           
         </div>
       <!-- Item 4 -->
-      <div class="hidden duration-700 ease-in-out flex justify-center  " data-carousel-item>
-          <img src="../static/ksp.png" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-          
-        </div>
+      <div class="hidden duration-700 ease-in-out flex justify-center" data-carousel-item style="height: 100%;">
+        <img src="../static/n1.png" class="absolute w-full h-full object-cover" alt="..." >
+        <h1 class="z-10 text-4xl roboto-slab font-bold tracking-tight text-black m-9"></h1>
+      </div>
       <!-- Item 5 -->
       <div class="hidden duration-700 ease-in-out flex justify-center items-center" data-carousel-item>
         <h1 class="z-10 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl roboto-slab font-bold tracking-tight text-black m-20">
@@ -86,7 +86,7 @@
 
 
 <!--Index Products-->
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 m-2">
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 m-2">
   {%with products_count=products_to_post|length%}
   
   {% if products_count > 5  %}
@@ -247,7 +247,7 @@
     Unicas Piezas
   </h1>
 </div>
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 m-2">
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 m-2">
   {% with products_count=products_to_post|length %}
   {% if products_count > 2 %}
     {% for x in products_to_post %}
