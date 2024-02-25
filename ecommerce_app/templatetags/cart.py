@@ -13,7 +13,7 @@ def is_in_cart(product, cart):
 
 @register.filter(name='cart_quantity')
 def cart_quantity(product, cart):
-    print('estuviste en cart_quantity')
+    #print('estuviste en cart_quantity')
     if not isinstance(product, str) and hasattr(product, 'id'):
         product_id = product.id
     elif isinstance(product, str) and product.isdigit():

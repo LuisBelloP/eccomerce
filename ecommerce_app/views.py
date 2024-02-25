@@ -183,6 +183,15 @@ class Cart(View):
         request.session.modified = True
         return HttpResponseRedirect(reverse('cart'))
 
+def cart_empty(request):
+    if request.method == 'POST':
+        cart = request.session.get('cart', {})
+        for product_id, quantitys in cart.items():
+            # Suponiendo que tienes un modelo de producto con un campo de 'stock'
+            product = products.objects.get(id=product_id)
+            product.quantity += quantitys  # Aumenta el stock del producto
+            product.save()
+        return HttpResponseRedirect(reverse('store')) 
 
 
 class CheckOut(View):
@@ -237,21 +246,15 @@ def get_addresses(request):
             )
             if locality_component:
                 address.append(locality_component['long_name'])
-    print(f'postal code {postal_code}')
-    print(f'address {address}')
-    
     return JsonResponse(address, safe=False)
 
 @csrf_exempt
 def create_checkout_session(request):
     stripe.api_key = settings.STRIPE_API_KEY
     cart = request.session.get('cart',{})
-    #total_quantity = [int(value) for value in cart.values()]
-    #sum_total_quantity = sum(total_quantity)
     line_items = []
     for product_id,quantity in cart.items():
         product= get_object_or_404(products,id=product_id)
-        
         line_items.append(
             {
                 'price':product.stripe_price_id,
@@ -263,26 +266,30 @@ def create_checkout_session(request):
             checkout_session = stripe.checkout.Session.create(
                 line_items=line_items,
                 mode='payment',
-                success_url=request.build_absolute_uri(reverse('orders')),
+                success_url=request.build_absolute_uri(reverse('payment_success')),
                 cancel_url=request.build_absolute_uri(reverse('cart')),
             )
-            request.session['cart'] = {}
             return JsonResponse({'id':checkout_session.id})
         except Exception as e:
-            print(e)  # Esto imprimirá la excepción completa en la terminal
+            print(e)  
         return JsonResponse({'error': str(e)}, status=400)
         
     if request.method == 'GET':
-        ### recuperar elementos del carrito
-        print(f'total quantity {quantity}')
-        print(f'el carrito {cart}')
-        ###this code is for new FEATURES
-        return render (request,'pay_method.html')
+        ids = list(request.session.get('cart').keys())
+        productbyid = products.get_products_by_id(ids)
+        return render (request,'pay_method.html',{'productbyid':productbyid})
 
 
 class OrderView(View):
     def get(self, request):
         customer = request.session.get('customer')
         orders = order.get_orders_by_customer(customer)
-        print(f'this is the order{orders}')
+        #print(f'this is the order{orders}')
         return render(request , 'orders.html'  , {'orders' : orders})
+    
+    
+def payment_success(request):
+    if 'cart' in request.session:
+        del request.session['cart']
+    
+    return redirect('orders')
