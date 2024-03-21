@@ -90,9 +90,8 @@
   {%with products_count=products_to_post|length%}
   
   {% if products_count > 5  %}
-    
     {% for x in products_to_post  %}
-      {%if forloop.counter <= 11 %}
+      {%if forloop.counter <= 8 %}
 <div class="max-w-sm mx-auto ">
   <div class="bg-white shadow-sm rounded-lg">
     <div class="h-70 w-full flex justify-center items-center  overflow-hidden rounded-lg">
@@ -172,14 +171,21 @@
         {% if x.quantity > 0%}
         <span
           class="arvo-regular bg-gray-100 text-blue-800 text-s font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-200 dark:text-blue-800 ml-3"
-          >{{x.quantity}}  Disponibles</span
+          >{{x.quantity}} Disponibles</span
         >
         {% else %}
         <span
-          class="arvo-regular bg-red-100 text-red-800 text-s font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-800 ml-3"
-          >No disponible</span
+          class="arvo-regular bg-yellow-100 text-yellow-800 text-s font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-200 dark:text-yellow-800 ml-3"
+          >Agotado</span
         >
         {% endif %}
+      </div>
+      {% comment %} comparative price {% endcomment %}
+      <div class="flex items-center">
+        <span
+          class="arvo-regular text-gray-800 text-s line-through mr-2   ml-3"
+          >$ {{x.comparative_price}} mxn</span
+        >
       </div>
       <div class="flex items-center justify-between">
          <!--Price-->
@@ -227,7 +233,7 @@
 
   
   {% for x in products_to_post  %}
-  div>
+  <div>
   <h2>{{ x.name }}</h2>
   <p>{{ x.description }}</p>
   {# etc... #}
@@ -248,7 +254,7 @@
   {% with products_count=products_to_post|length %}
   {% if products_count > 2 %}
     {% for x in products_to_post %}
-      {% if forloop.revcounter <= 9 %}
+      {% if forloop.revcounter <= 17 %}
         {# Renderiza la información del producto aquí #}
         <div class="max-w-2xl mx-auto">
           <div class="bg-white shadow-sm rounded-lg">
@@ -333,16 +339,24 @@
                 >
                 {% else %}
                 <span
-                  class="arvo-regular bg-red-100 text-red-800 text-s font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-800 ml-3"
-                  >No disponible</span
+                  class="arvo-regular bg-red-100 text-yellow-800 text-s font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-200 dark:text-yellow-800 ml-3"
+                  >Agotado</span
                 >
                 {% endif %}
+              </div>
+             {% comment %} precio comparado {% endcomment %}
+              <div class="flex items-center">
+                <span
+                  class="arvo-regular text-gray-800 text-s line-through mr-2   ml-3"
+                  >$ {{x.comparative_price}} mxn</span
+                >
               </div>
               <div class="flex items-center justify-between">
                  <!--Price-->
                 <span class="text-3xl arvo-regular text-gray-900 dark:text-gray-900"
                   >${{x.price}}mx</span
                 >
+                
                 {% comment %}
                   function to add cardd ####################################################
                 {% endcomment %}

@@ -48,8 +48,8 @@ def store (request):
     if not cart:
         request.session['cart'] = {}
     products_to_post = products.get_all_products()
-    print (f'the products {products_to_post}')
-    print('you are : ', request.session.get('email'))
+    #print (f'the products {products_to_post}')
+    #print('you are : ', request.session.get('email'))
     return render(request,'index.html',{'products_to_post':products_to_post})
 
 class Detail_view(View):
