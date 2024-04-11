@@ -26,4 +26,6 @@ urlpatterns = [
     path('check-out/',views.CheckOut.as_view(),name='checkout'),
     path('get_addresses/', views.get_addresses, name='get_addresses'),
     path('orders/', auth_middleware(views.OrderView.as_view()), name='orders'),
+    
+    path('link1/',views.check_out_session_link,name="link1")
 ]
