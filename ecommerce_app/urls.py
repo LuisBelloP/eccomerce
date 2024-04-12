@@ -27,5 +27,6 @@ urlpatterns = [
     path('get_addresses/', views.get_addresses, name='get_addresses'),
     path('orders/', auth_middleware(views.OrderView.as_view()), name='orders'),
     
-    path('link1/',views.check_out_session_link,name="link1")
+    path('<int:id>/link/',views.check_out_session_link,name="link1"),
+    path('stripe_webhook/',views.stripe_webhook,name="stripe_webhook"),
 ]

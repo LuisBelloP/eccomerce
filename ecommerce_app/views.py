@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect,HttpResponseRedirect,get_object_or_404,HttpResponse
+import stripe.error
 from .models import products,Customer,order
 from django.contrib.auth.hashers import check_password,make_password
 from django.views import View
@@ -10,7 +11,11 @@ from django.http import JsonResponse
 import requests 
 import stripe
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+
+
 # Create your views here.
+
 
 
 
@@ -295,26 +300,65 @@ def payment_success(request):
     return redirect('orders')
 
 
-# Stripe Links products
+##################################### Stripe Links products
 
 @csrf_exempt
-def check_out_session_link(request):
+def check_out_session_link(request,id):
     if request.method == "GET" or request.method == "POST":
-        session = create_stripe_session_link()
+        session = create_stripe_session_link(id)
         
         if request.method == "GET":
             return HttpResponseRedirect(session.url)
         else:
             return JsonResponse({'url':session.url})
 
+def get_price(id):
+    dictionary_price = {
+       10:"price_1OanB5LtLKOujhTJQhb5RzSM",
+       12:"price_1OanB5LtLKOujhTJQhb5RzSM",
+       14:"price_1OanB5LtLKOujhTJQhb5RzSM",
+       15:"price_1OanB5LtLKOujhTJQhb5RzSM",
+       17:"price_1OanB5LtLKOujhTJQhb5RzSM",
+       18:"price_1OanB5LtLKOujhTJQhb5RzSM",
+       19:"price_1OanB5LtLKOujhTJQhb5RzSM",
+       20:"price_1OanB5LtLKOujhTJQhb5RzSM",
+       21:"price_1OanB5LtLKOujhTJQhb5RzSM",
+       22:"price_1OanB5LtLKOujhTJQhb5RzSM",
+       23:"price_1OanB5LtLKOujhTJQhb5RzSM",
+       24:"price_1OmOnYLtLKOujhTJS0SMFIFk",
+       25:"price_1OmOnYLtLKOujhTJS0SMFIFk",
+       26:"price_1OmOmJLtLKOujhTJfPegBx6Y",
+       27:"price_1OmOmJLtLKOujhTJfPegBx6Y",
+       28:"price_1OmOmJLtLKOujhTJfPegBx6Y",
+       29:"price_1OmOmJLtLKOujhTJfPegBx6Y",
+       30:"price_1OmOmJLtLKOujhTJfPegBx6Y",
+       31:"price_1OmNnQLtLKOujhTJNr5Gkhxz",
+       32:"price_1OmNnQLtLKOujhTJNr5Gkhxz",
+       33:"price_1OqbqFLtLKOujhTJy70gftaP",
+       34:"price_1OqbqFLtLKOujhTJy70gftaP",
+       35:"price_1OmOmJLtLKOujhTJfPegBx6Y",
+       36:"price_1OmOnYLtLKOujhTJS0SMFIFk",
+       37:"price_1OmOnYLtLKOujhTJS0SMFIFk",
+       38:"price_1OmOmJLtLKOujhTJfPegBx6Y",
+       39:"price_1Owp6CLtLKOujhTJLirmtcpe",
+       40:"price_1Owp6CLtLKOujhTJLirmtcpe",
+       41:"price_1OqbqFLtLKOujhTJy70gftaP",
+       42:"price_1P48akLtLKOujhTJct02lsR5",
+       43:"price_1OmOmJLtLKOujhTJfPegBx6Y",
+       44:"price_1OqbqFLtLKOujhTJy70gftaP",
+    }
+    
+    return dictionary_price.get(id,"price_1OanB5LtLKOujhTJQhb5RzSM")
 
-
-def create_stripe_session_link():
+def create_stripe_session_link(id):
     stripe.api_key = settings.STRIPE_API_KEY
+    
+    price = get_price(id)
+        
     session = stripe.checkout.Session.create(
         payment_method_types=['card'],
         line_items=[{
-            'price': "price_1OnnyLLtLKOujhTJm4DFamkF",
+            'price': price,
             'quantity':1,
         }],
         mode='payment',
@@ -331,9 +375,56 @@ def create_stripe_session_link():
             "submit":{ "message":"we'll email your instructions on hot to get started"},
             "after_submit": {
                 "message":
-                "Learn more about **your purchase** on our [product page](https://www.stripe.com/).",
+                "Learn more about **your purchase** on our [product page](https://usadelivery.onrender.com/).",
             },
         },
-        metadata={'order_id': '12345' },  
+        metadata={'product_id': id },  
     )
     return session
+
+
+@require_POST
+@csrf_exempt
+
+
+def stripe_webhook(request):
+    stripe.api_key = settings.STRIPE_API_KEY
+    
+    signature_header = request.META['HTTP_STRIPE_SIGNATURE']
+    payload = request.body
+    endpoint_secret = 'firma secreta de webhook'
+    
+    try:
+        event = stripe.Webhook.construct_event(
+            payload,signature_header,endpoint_secret
+        )
+    except ValueError as e:
+        
+        
+        return HttpResponse(status=400)
+    except stripe.error.SignatureVerificationError as e:
+        
+        
+        return HttpResponse(status=400)
+    
+    if event['type'] == 'checkout.session.completed':
+        session = event['data']['object']
+        
+        product_id = session.get('metadata').get('product_id')
+        
+        print(session)
+        print(product_id)
+        
+        less_quantity(product_id,products)
+        
+    return HttpResponse(status=200)
+
+
+def less_quantity(id,model):
+    elements = model.get(id)
+    
+    if elements.id == id:
+        elements.quantity -1
+        elements.save()
+        return elements
+    

@@ -3,7 +3,7 @@ from .models import category,products,Customer,order
 # Register your models here.
 
 class Product_Admin(admin.ModelAdmin):
-    list_display =('name','price','comparative_price','description','image','image_render','quantity','stripe_price_id')
+    list_display =('id','name','price','comparative_price','description','image','image_render','quantity','stripe_price_id')
     ##search_fields = ('')
     list_editable = ('price','comparative_price','image','description','quantity','stripe_price_id')
     
