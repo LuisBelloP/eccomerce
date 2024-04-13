@@ -391,7 +391,7 @@ def stripe_webhook(request):
     stripe.api_key = settings.STRIPE_API_KEY
     
     signature_header = request.META['HTTP_STRIPE_SIGNATURE']
-    payload = request.body
+    payload = request.body.t
     endpoint_secret = 'firma secreta de webhook'
     
     try:
