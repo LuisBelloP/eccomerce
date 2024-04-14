@@ -360,31 +360,12 @@ def create_stripe_session_link(id):
             'quantity':1,
         }],
         mode='payment',
+        payment_method_options={"card": {"installments": {"enabled": True}}},
         
         success_url="https://usadelivery.onrender.com/",
         cancel_url="https://usadelivery.onrender.com/",
         shipping_address_collection={'allowed_countries':["MX"]},
         phone_number_collection={"enabled": True},
-        payment_method_options={
-            
-                     "card": {
-            "installments": {
-                "enabled": True,
-                "available_plans": [
-            {
-                "count": 3,
-                "interval": "month",
-                "type": "fixed_count"
-          },
-            {
-                "count": 6,
-                "interval": "month",
-                "type": "fixed_count"
-            },]
-            },
-            "request_three_d_secure": "automatic"
-             }
-        },
         custom_text={
             "shipping_address":{
                 "message":
