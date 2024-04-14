@@ -352,8 +352,6 @@ def get_price(id):
 
 def create_stripe_session_link(id):
     stripe.api_key = settings.STRIPE_API_KEY
-    
-    
     price = get_price(id)
         
     session = stripe.checkout.Session.create(
@@ -369,28 +367,7 @@ def create_stripe_session_link(id):
         cancel_url="https://usadelivery.onrender.com/",
         shipping_address_collection={'allowed_countries':["MX"]},
         phone_number_collection={"enabled": True},
-        payment_intent_data={
-            'setup_future_usage': 'off_session',
-            'payment_method_options': {
-                'card': {
-                    'installments': {
-                        'enabled': True,
-                        'plans': [
-                            {
-                                'count': 3,  # 3 meses sin intereses
-                                'interval': 'month',
-                                'type': 'fixed_count'
-                            },
-                            {
-                                'count': 6,  # 6 meses sin intereses
-                                'interval': 'month',
-                                'type': 'fixed_count'
-                            }
-                        ]
-                    }
-                }
-            }
-        },
+
         custom_text={
             "shipping_address":{
                 "message":
