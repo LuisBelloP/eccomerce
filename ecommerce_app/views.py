@@ -360,7 +360,13 @@ def create_stripe_session_link(id):
             'quantity':1,
         }],
         mode='payment',
-        payment_method_options={"card": {"installments": {"enabled": True}}},
+        payment_method_options={
+            "card": {
+                "installments": {
+                    "enabled": True
+                }
+            }
+        },
         
         success_url="https://usadelivery.onrender.com/",
         cancel_url="https://usadelivery.onrender.com/",
