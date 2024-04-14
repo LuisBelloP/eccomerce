@@ -387,14 +387,16 @@ def create_stripe_session_link(id):
 
 @require_POST
 @csrf_exempt
-
-
 def stripe_webhook(request):
     stripe.api_key = settings.STRIPE_API_KEY
     
     signature_header = request.META['HTTP_STRIPE_SIGNATURE']
-    payload = request.body.t
+    print('the webhook is ready')
+    payload = request.body
     endpoint_secret = 'whsec_ok06pitm1wjLrVvh4LS21tlbkVdbGugq'
+    print(f'{request}')
+    
+    
     
     try:
         event = stripe.Webhook.construct_event(
@@ -412,17 +414,18 @@ def stripe_webhook(request):
     if event['type'] == 'checkout.session.completed':
         session = event['data']['object']
         product_id = session.get('metadata',{}).get('product_id')
-    
-    
-        try:
-            less_quantity(product_id)
-            print(session,"this is the session")
-            print(product_id,"this is the product id")
-        except products.DoesNotExist:
-            print(f"This {product_id} there isnt in stock")
-        except Exception as e:
-            print(f"an error has ocurred:{str(e)}")
         
+        if product_id:
+            try:
+                less_quantity(product_id)
+                print(session,"this is the session")
+                print(product_id,"this is the product id")
+            except products.DoesNotExist:
+                print(f"This {product_id} there isnt in stock")
+            except Exception as e:
+                print(f"an error has ocurred:{str(e)}")
+        else:
+            return HttpResponse(status=400)
     return HttpResponse(status=200)
 
 
