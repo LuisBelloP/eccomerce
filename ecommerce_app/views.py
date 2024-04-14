@@ -314,7 +314,9 @@ def check_out_session_link(request,id):
 
 def get_price(id):
     dictionary_price = {
-       10:"price_1OanB5LtLKOujhTJQhb5RzSM",
+        ### key to change
+       10:"price_1OnnyLLtLKOujhTJm4DFamkF",
+        #############
        12:"price_1OanB5LtLKOujhTJQhb5RzSM",
        14:"price_1OanB5LtLKOujhTJQhb5RzSM",
        15:"price_1OanB5LtLKOujhTJQhb5RzSM",
@@ -392,7 +394,7 @@ def stripe_webhook(request):
     
     signature_header = request.META['HTTP_STRIPE_SIGNATURE']
     payload = request.body.t
-    endpoint_secret = 'firma secreta de webhook'
+    endpoint_secret = 'whsec_ok06pitm1wjLrVvh4LS21tlbkVdbGugq'
     
     try:
         event = stripe.Webhook.construct_event(
@@ -409,22 +411,27 @@ def stripe_webhook(request):
     
     if event['type'] == 'checkout.session.completed':
         session = event['data']['object']
-        
-        product_id = session.get('metadata').get('product_id')
-        
-        print(session)
-        print(product_id)
-        
-        less_quantity(product_id,products)
+        product_id = session.get('metadata',{}).get('product_id')
+    
+    
+        try:
+            less_quantity(product_id)
+            print(session,"this is the session")
+            print(product_id,"this is the product id")
+        except products.DoesNotExist:
+            print(f"This {product_id} there isnt in stock")
+        except Exception as e:
+            print(f"an error has ocurred:{str(e)}")
         
     return HttpResponse(status=200)
 
 
-def less_quantity(id,model):
-    elements = model.get(id)
+def less_quantity(product_id):
+    element_product = get_object_or_404(products,id=product_id)
     
-    if elements.id == id:
-        elements.quantity -1
-        elements.save()
-        return elements
-    
+    if element_product.quantity > 0:
+        element_product.quantity -= 1
+        element_product.save()
+        return element_product
+    else:
+        print('No hay productos para descontar')
