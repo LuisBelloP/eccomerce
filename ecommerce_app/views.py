@@ -314,9 +314,7 @@ def check_out_session_link(request,id):
 
 def get_price(id):
     dictionary_price = {
-        ### key to change
-       10:"price_1OnnyLLtLKOujhTJm4DFamkF",
-        #############
+       10:"price_1OanB5LtLKOujhTJQhb5RzSM",
        12:"price_1OanB5LtLKOujhTJQhb5RzSM",
        14:"price_1OanB5LtLKOujhTJQhb5RzSM",
        15:"price_1OanB5LtLKOujhTJQhb5RzSM",
@@ -389,7 +387,6 @@ def create_stripe_session_link(id):
 @csrf_exempt
 def stripe_webhook(request):
     stripe.api_key = settings.STRIPE_API_KEY
-    
     signature_header = request.META['HTTP_STRIPE_SIGNATURE']
     print('the webhook is ready')
     payload = request.body
