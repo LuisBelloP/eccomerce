@@ -17,30 +17,36 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Josefin+Slab:ital,wght@0,100..700;1,100..700&family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
-   <!-- Agrega Swiper's CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Noto+Sans+JP:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+   
+    <!-- Agrega Swiper's CSS -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
     <!--Script Stripe-->
     <script src="https://js.stripe.com/v3/"></script>
 
     <link rel="preload" href="https://cms.coachoutlet.com/i/coachoutlet/20240214-m2-20-off-promo-wallets.png?&w=960&sm=aspect&aspect=581:725&fmt=webp" as="image">
 
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   </head>
   <body>
     <!-- navbar -->
-    <body>
-      <nav
-        class="fixed top-0 left-0 w-full px-4 py-2 flex justify-between items-center bg-white z-10 "
+    <body class=" bg-slate-50">
+      <nav 
+      
+        class="arvo-regular fixed h-28 top-0 left-0 w-full px-4 py-2 flex justify-between items-center bg-slate-50   z-10"
       >
-        <a class="text-3xl  font-bold leading-none" href="/store">
-          
-          <p class="text-blue-500 text-xxl roboto-slab ">
-            <span class="material-symbols-outlined">
-            local_shipping
-          </span>
-            USA Delivery
+       
+        <div class="flex">
+            <a class="flex" href="/store">
+              <img data-aos="fade-up" data-aos-duration="2000" class="h-9 w-9"  src = "../static/logo.png" alt="logo"/>
+              <img data-aos="fade-up" data-aos-duration="2000" class="h-9 w-19" src = "../static/title_logo.png" alt="logo"/>
+            </a>
             
-          </p>
-        </a>
+        </div>
+        
+
         <div class="lg:hidden">
           <button class="navbar-burger flex items-center p-3">
             <svg
@@ -53,105 +59,89 @@
             </svg>
           </button>
         </div>
-        <ul
+        
+        <ul  
           class="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6"
         >
-          <li>
-            <a
-              class="arvo-regular text-md text-black-400 hover:text-gray-500 "
+        
+          
+            <a 
+              data-aos="fade-up" data-aos-duration="2000"
+              class=" text-lg text-black-400 hover:text-gray-500 "
               href="/store"
               >Tienda</a
             >
-          </li>
-          <li class="text-black-400 ">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              stroke="currentColor"
-              class="w-4 h-4 current-fill"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
-              />
-            </svg>
-          </li>
-          <li>
-            <a
-              class=" arvo-regular text-md text-black-400 hover:text-gray-500"
+          
+            <a 
+              data-aos="fade-up" data-aos-duration="2000"
+              class="  text-lg text-black-400 hover:text-gray-500"
               href="/contactus"
               >Nosotros</a
             >
-          </li>
-        </ul>
-        
-
-            
-        {%if request.session.customer%}
+          
+          {%if request.session.customer%}
         <div>
-          <a class=" josefin-slab hidden lg:inline-block py-2 px-6 bg-gray-500 hover:bg-gray-600 text-sm text-white font-bold rounded-xl transition duration-200 ml-1"
+          <a data-aos="fade-up" data-aos-duration="2000"
+          class=" hidden lg:inline-block block text-lg text-black-400 hover:text-gray-500"
           href="">
-          <span class="badge badge-success">
+          <span class="badge badge-success m-2">
             Hola {{request.session.email}}
           </span>
           </a>
 
-          <a class="josefin-slab hidden lg:inline-block py-2 px-6 bg-gray-500 hover:bg-gray-600 text-sm text-white font-bold rounded-xl transition duration-200 ml-1"
+          <a data-aos="fade-up" data-aos-duration="2000"
+          class=" hidden lg:inline-block block text-lg text-black-400 hover:text-gray-500"
           href="/logout">
-          <span class="badge badge-success">
+          <span class="badge badge-success m-2">
             Cerrar sesion
           </span>
           </a>
 
-          <a class=" josefin-slab hidden lg:inline-block py-2 px-6 bg-gray-500 hover:bg-gray-600 text-sm text-white font-bold rounded-xl transition duration-200 ml-1"
+          <a data-aos="fade-up" data-aos-duration="2000"
+          class="  hidden lg:inline-block block text-lg text-black-400 hover:text-gray-500"
           href="/orders">
-          <span class="badge badge-success">
+          <span class="badge badge-success m-2">
             Orden
           </span>
           </a>
-          <a
-          class="josefin-slab hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200 ml-3"
+          <a data-aos="fade-up" data-aos-duration="2000"
+          class=" hidden lg:inline-block block text-lg text-black-400 hover:text-gray-500"
           href="/cart"
           > Carrito 
-          <span class="badge badge-success">{{ request.session.total_items }}</span>
+          <span class="badge badge-success m-2">{{ request.session.total_items }}</span>
           <span class="sr-only">(current)</span></a>
           </a>
-
-
-          
         </div>
           
         {%else%}
-          <a
-          class="arvo-regular hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-800 hover:bg-gray-800 text-md text-white  rounded-md transition duration-200"
+          <a data-aos="fade-up" data-aos-duration="2000"
+          class=" text-lg text-black-400 hover:text-gray-500 "
           href="/login"
-          >Iniciar sesion</a>
-          <a
-          class="arvo-regular hidden lg:inline-block py-2 px-6 bg-blue-600 hover:bg-blue-600 text-md text-white  rounded-md transition duration-200"
+          >Entrar</a>
+          <a data-aos="fade-up" data-aos-duration="2000"
+          class="text-lg text-black-400 hover:text-gray-500 "
           href="/signup"
           >Registrarse</a>
 
         {% endif %}
 
+
+        </ul>
+        
+
+            
+        
     {% comment %} navbar mobile device {% endcomment %}
       </nav>
       <div class="navbar-menu relative z-50 hidden">
-        <div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
+        <div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25 "></div>
         <nav
           class="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-4 px-6 bg-white border-r overflow-y-auto"
         >
           <div class="flex items-center mb-8">
-            <a class="mr-auto text-3xl font-bold leading-none" href="/store">
-              <p class="text-blue-500 text-xxl roboto-slab ">
-            <span class="material-symbols-outlined">
-            local_shipping
-          </span>
-            USA Delivery
-            
-          </p>
+            <a class="mr-auto flex  leading-none" href="/store">
+                  <img  class="h-9 w-9"  src = "../static/logo.png" alt="logo"/>
+                  <img  class="h-9 w-19" src = "../static/title_logo.png" alt="logo"/>
             </a>
             <button class="navbar-close">
               <svg
@@ -174,14 +164,14 @@
             <ul>
               <li class="mb-1">
                 <a
-                  class="block p-4 text-sm arvo-regular text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
+                  class="block p-4 text-sm arvo-regular text-gray-400 hover:bg-gray-50 hover:text-black-600 rounded"
                   href="/store"
                   >Tienda</a
                 >
               </li>
               <li class="mb-1">
                 <a
-                  class="block p-4 text-sm arvo-regular text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
+                  class="block p-4 text-sm arvo-regular text-gray-400 hover:bg-gray-50 hover:text-black-600 rounded"
                   href="/contactus"
                   >Nosotros</a
                 >
@@ -239,7 +229,7 @@
        {% block content %}{% endblock %}   
       </section>
       <footer class="w-full text-gray-700 bg-gray-100 body-font">
-        <div
+        <div data-aos="fade-up" data-aos-duration="2000"
             class="container flex flex-col flex-wrap px-5 py-10 mx-auto md:items-center lg:items-start md:flex-row md:flex-no-wrap">
             <div class="flex-shrink-0 w-64 mx-auto text-center md:mx-0 md:text-left">
                 
@@ -288,7 +278,7 @@
                 
             </div>
         </div>
-        <div class="bg-white">
+        <div class="bg-gray-100">
             <div class="container px-5 py-4 mx-auto">
                 <p class="text-sm text-gray-700 capitalize xl:text-center">© 2023 USA Delivery </p>
             </div>
@@ -437,6 +427,12 @@
           },
         },
       });
+    </script>
+
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init()
     </script>
 
 

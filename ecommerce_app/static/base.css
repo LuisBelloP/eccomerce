@@ -18,7 +18,7 @@
 .josefin-slab{
     font-family: "Josefin Slab", serif;
     font-optical-sizing: auto;
-    font-weight: 300;
+    font-weight: 500;
     font-style: normal;
 }
 
@@ -47,3 +47,64 @@
     font-style: italic;
 }
   
+.libre-baskerville-regular {
+    font-family: "Libre Baskerville", serif;
+    font-weight: 500;
+    font-style: normal;
+  }
+  
+.libre-baskerville-bold {
+    font-family: "Libre Baskerville", serif;
+    font-weight: 500;
+    font-style: normal;
+}
+  
+.libre-baskerville-regular-italic {
+    font-family: "Libre Baskerville", serif;
+    font-weight: 400;
+    font-style: italic;
+}
+
+ 
+
+.playfair-display{
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 100;
+    font-style: normal;
+}
+  
+.card {
+  width: 250px;
+  height: 250px;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.card-content {
+  transition: transform 0.3s;
+}
+
+.card-content h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.card-content p {
+  margin: 5px 0;
+}
+
+  
+
