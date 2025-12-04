@@ -349,21 +349,22 @@ def get_price(id):
     }
     
     return dictionary_price.get(id,"price_1OanB5LtLKOujhTJQhb5RzSM")
-
-def create_stripe_session_link(id):
+def create_stripe_session_link(id: int):
     stripe.api_key = settings.STRIPE_API_KEY
-    price = get_price(id)
+    price_id = get_price(id)
+
     session = stripe.checkout.Session.create(
-        payment_method_types=['card'],
-        mode='payment',
-        
-        line_items=[{
-            'price': price,
-            'quantity':1,
-        }],
+        mode="payment",
+        payment_method_types=["card"],
+
+        line_items=[
+            {
+                "price": price_id,
+                "quantity": 1,
+            }
+        ],
 
         allow_promotion_codes=True,
-        
         payment_method_options={
             "card": {
                 "installments": {
@@ -371,27 +372,39 @@ def create_stripe_session_link(id):
                 }
             }
         },
-        
-        
+
         success_url="https://usadelivery.onrender.com/",
         cancel_url="https://usadelivery.onrender.com/",
-        shipping_address_collection={'allowed_countries':["MX"]},
-        phone_number_collection={"enabled": True},
+
+        shipping_address_collection={
+            "allowed_countries": ["MX"],
+        },
+        phone_number_collection={
+            "enabled": True,
+        },
+
         custom_text={
-            "shipping_address":{
-                "message":
-                "Please note that we can't"
+            "shipping_address": {
+                "message": "Please note that we can't deliver to all regions yet."
             },
-            "":{},
-            "submit":{ "message":"we'll email your instructions on hot to get started"},
+            "submit": {
+                "message": "We'll email your instructions on how to get started."
+            },
             "after_submit": {
-                "message":
-                "Learn more about **your purchase** on our [product page](https://usadelivery.onrender.com/).",
+                "message": (
+                    "Learn more about **your purchase** on our "
+                    "[product page](https://usadelivery.onrender.com/)."
+                )
             },
         },
-        metadata={'product_id': id },  
+
+        metadata={
+            "product_id": str(id),
+            "source": "link_checkout",
+        },
     )
     return session
+
 
 
 @require_POST
