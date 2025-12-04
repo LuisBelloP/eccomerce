@@ -361,6 +361,9 @@ def create_stripe_session_link(id):
             'price': price,
             'quantity':1,
         }],
+
+        allow_promotion_codes=True,
+        
         payment_method_options={
             "card": {
                 "installments": {
